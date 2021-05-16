@@ -10,28 +10,27 @@ class CreateGroup extends StatelessWidget {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(10.0),
-        padding: EdgeInsets.only(left: size.width * 0.1, right: size.width * 0.1),
+        padding: EdgeInsets.only(left: size.width * 0.1, right: size.width * 0.1, top: size.height * 0.01),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               child: Text('Create Group', textAlign: TextAlign.left, style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold, fontSize: 30),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: size.height * 0.05),
             Text('Group Photo',
                 style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold, fontSize: 15)
             ),
-            SizedBox(height:10),
+            SizedBox(height: size.height * 0.01),
             Container(
               decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8.0)),
-              height: 100,
-              width: 100,
+              height: size.height * 0.2,
+              width: size.height * 0.2,
               child: Stack(
                 children: <Widget>[
                   ClipRRect(borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network('https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',fit: BoxFit.fill, height: 100, width: 100),
+                    child: Image.network('https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',fit: BoxFit.fill, height: size.height * 0.2, width: size.height * 0.2),
                   ),
                   Positioned(
                     bottom: -2, right: -2,
@@ -45,11 +44,11 @@ class CreateGroup extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: size.height * 0.05),
             textField("Group Name", 0.07, 0.8, 25.0, Colors.white),
-            SizedBox(height: 20),
+            SizedBox(height: size.height * 0.05),
             textField("Group Description", 0.07, 0.8, 25.0, Colors.white),
-            SizedBox(height: 30),
+            SizedBox(height: size.height * 0.05),
             Btn("Create", Colors.deepPurple, 0.07, 0.8),
           ],
         ),
