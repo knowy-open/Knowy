@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'useful_widgets/bottomBar.dart';
-import 'useful_widgets/txtInformation.dart';
-import 'useful_widgets/btn.dart';
+import 'package:new_project/useful_widgets/textfield.dart';
+import '../useful_widgets/bottomBar.dart';
+import '../useful_widgets/txtInformation.dart';
+import '../useful_widgets/btn.dart';
+import '../useful_widgets/textfield.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -73,11 +75,12 @@ class Settings extends State<ProfileSettings> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TxtInformation("Name"),
+                  
+                  text_field("Name"),
                   SizedBox(
                     height: 20,
                   ),
-                  TxtInformation("Surname"),
+                  text_field("Surname"),
                   SizedBox(
                     height: 20,
                   ),
@@ -85,30 +88,9 @@ class Settings extends State<ProfileSettings> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                       shape: BoxShape.rectangle,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade300,
-                            spreadRadius: 0.0,
-                            blurRadius: 2,
-                            offset: Offset(3.0, 3.0)),
-                        BoxShadow(
-                            color: Colors.grey.shade400,
-                            spreadRadius: 0.0,
-                            blurRadius: 10 / 2.0,
-                            offset: Offset(3.0, 3.0)),
-                        BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: 2.0,
-                            blurRadius: 2,
-                            offset: Offset(-3.0, -3.0)),
-                        BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: 2.0,
-                            blurRadius: 10 / 2,
-                            offset: Offset(-3.0, -3.0)),
-                      ],
+                      //boxShadow: TextBoxShadow().getShadows(),
                     ),
-                    child: TxtInformation("Mail")
+                    child: text_field("E-Mail")
                   ),
                   SizedBox(
                     height: 20,
@@ -181,6 +163,35 @@ class Settings extends State<ProfileSettings> {
 }
 
 
+
+class TextBoxShadow extends BoxShadow{
+   
+      List textBoxShadow = [BoxShadow(
+                            color: Colors.grey.shade300,
+                            spreadRadius: 0.0,
+                            blurRadius: 2,
+                            offset: Offset(3.0, 3.0)),
+                        BoxShadow(
+                            color: Colors.grey.shade400,
+                            spreadRadius: 0.0,
+                            blurRadius: 10 / 2.0,
+                            offset: Offset(3.0, 3.0)),
+                        BoxShadow(
+                            color: Colors.white,
+                            spreadRadius: 2.0,
+                            blurRadius: 2,
+                            offset: Offset(-3.0, -3.0)),
+                        BoxShadow(
+                            color: Colors.white,
+                            spreadRadius: 2.0,
+                            blurRadius: 10 / 2,
+                            offset: Offset(-3.0, -3.0))
+      ];
+  
+     
+                     
+                      
+}
 
 
 
