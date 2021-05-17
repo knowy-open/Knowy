@@ -7,7 +7,8 @@ class textField extends StatelessWidget {
  final double textFieldWidth;
  final double borderRadius;
 
-  const textField( this.textName, this.textFieldHeight, this.textFieldWidth, this.borderRadius,this.textFieldBackgroundColor) ;
+
+  textField( this.textName, this.textFieldHeight, this.textFieldWidth, this.borderRadius,this.textFieldBackgroundColor) ;
  // height: 0.07  width: 0.8
  // borderRadius: 15.0 for bottom sheet , 25.0 for other text field
 
@@ -21,6 +22,7 @@ class textField extends StatelessWidget {
 
     return SizedBox(height: MediaQuery.of(context).size.height*textFieldHeight, width: MediaQuery.of(context).size.width*textFieldWidth,
       child: TextField(
+        
         obscureText: b,
         autofocus: true,
         maxLines: 1,

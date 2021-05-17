@@ -75,81 +75,46 @@ class Settings extends State<ProfileSettings> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  
-                  text_field("Name"),
+                  textField("Name", 0.07, 0.8, 25, Colors.white),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  text_field("Surname"),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shape: BoxShape.rectangle,
-                      //boxShadow: TextBoxShadow().getShadows(),
-                    ),
-                    child: text_field("E-Mail")
+                  textField("Surname", 0.07, 0.8, 25, Colors.white
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  TextField(
-                    
-                    textDirection: TextDirection.ltr,
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.grey, width: 2.0),
-                      ),
-                      hintText: 'bio',
-                    ),
-                  ),
+                  textField("E-Mail", 0.07, 0.8, 25, Colors.white),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
+                  textField("Biography", 0.07, 0.8, 25, Colors.white),
                   SizedBox(
-                    width: 200,
-                    child: Btn("Save",Colors.deepPurple),
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 200,
-                    child: RaisedButton(
+                  TextButton(
                       onPressed: () {},
-                      color: Colors.purple,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
                       child: Text(
-                        "Logout",
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ),
+                        "Change Password",
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(color: Colors.deepPurple),
+                      )),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   SizedBox(
-                    height: 20,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Btn("Save", Colors.deepPurple, 0.07, 0.8),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   SizedBox(
-                    width: 200,
-                    child: RaisedButton(
-                      onPressed: () {},
-                      color: Colors.black,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        "Delete Account",
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Btn("Logout", Colors.black, 0.07, 0.8),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Btn("Delete Account", Colors.black, 0.07, 0.8),
                   ),
                 ],
               )
@@ -161,39 +126,3 @@ class Settings extends State<ProfileSettings> {
     );
   }
 }
-
-
-
-class TextBoxShadow extends BoxShadow{
-   
-      List textBoxShadow = [BoxShadow(
-                            color: Colors.grey.shade300,
-                            spreadRadius: 0.0,
-                            blurRadius: 2,
-                            offset: Offset(3.0, 3.0)),
-                        BoxShadow(
-                            color: Colors.grey.shade400,
-                            spreadRadius: 0.0,
-                            blurRadius: 10 / 2.0,
-                            offset: Offset(3.0, 3.0)),
-                        BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: 2.0,
-                            blurRadius: 2,
-                            offset: Offset(-3.0, -3.0)),
-                        BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: 2.0,
-                            blurRadius: 10 / 2,
-                            offset: Offset(-3.0, -3.0))
-      ];
-  
-     
-                     
-                      
-}
-
-
-
-
-

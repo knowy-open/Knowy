@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'textField.dart';
-import 'btn.dart';
+import 'package:new_project/useful_widgets/btn.dart';
+import 'package:new_project/useful_widgets/textField.dart';
 String optionsValue;
 List deleteOptions =["o","bu","şu","fskdgl"];
  class deleteAccount extends StatelessWidget {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'btn.dart';
-import 'textField.dart';
+//import 'btn.dart';
+//import 'textField.dart';
+import 'package:new_project/useful_widgets/btn.dart';
+import 'package:new_project/useful_widgets/textField.dart';
  class addMember extends StatelessWidget {
    @override
    Widget build(BuildContext context) {

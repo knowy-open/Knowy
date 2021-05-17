@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'btn.dart';
+import 'package:new_project/useful_widgets/btn.dart';
 
 
 
