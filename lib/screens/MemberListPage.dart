@@ -28,19 +28,20 @@ class _MemberListState extends State<MemberList>{
 
   @override
   Widget build(BuildContext context){
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 10),
+            SizedBox(height: size.height * 0.01),
             Row(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SizedBox(
-                    width:240,
-                    height:30,
+                    width:size.width * 0.8,
+                    height:size.height * 0.05,
                     child:TextField(
                       onChanged: (String) {},
                       cursorColor: Colors.deepPurple,
@@ -75,16 +76,7 @@ class _MemberListState extends State<MemberList>{
                     ),
                   ),
                 ),
-                Container(
-                  height:30, width:30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey[300],width:1),
-                    color: Colors.white,
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: BtnAdd(),
-                ),
+                BtnAdd(),
               ],
             ),
             Container(
