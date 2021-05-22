@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/screens/profile.dart';
+import 'package:new_project/screens/trusrVotePage.dart';
 
 class BottomBar extends StatelessWidget {
   @override
@@ -7,9 +8,11 @@ class BottomBar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       onTap: (currentIndex) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Profile()),
+        
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TrustVotePage()), 
+
         );
       },
       iconSize: 35,
@@ -43,3 +46,4 @@ class BottomBar extends StatelessWidget {
     );
   }
 }
+
