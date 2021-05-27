@@ -4,6 +4,8 @@ import 'main.dart';
 
 //parametreler alır hale gelmesi lazım
 //border rengi değişecek şekilde olmalı
+List<String> soru =["İNANAMIYORUM  falfksld kdvvvvvcdssssss vdssssss svfsvd oısgjofjgkfg skdjgksjgskgjso sosjosıgjosıg","SONUNDA","ÇALIŞTI!"];
+List<String> ad =['bikem demirci bikem demirci bikem demirci','Elif Nur Hançer','Bahadır Akgün'];
 class questionCard extends StatefulWidget {
   @override
   _questionState createState() => _questionState();
