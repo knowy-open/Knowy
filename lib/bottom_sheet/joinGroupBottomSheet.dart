@@ -4,91 +4,96 @@ import 'package:new_project/useful_widgets/btn.dart';
 
 
 
-class joinGroup extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      //mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-            top:MediaQuery.of(context).size.height*0.05,
-            left:MediaQuery.of(context).size.width*0.05, ),
-          child: Row( children: [
-            Column(
-              children: [
-                CircleAvatar(backgroundColor: Colors.black,
-                  radius: MediaQuery.of(context).size.height*0.06,
-                ),
-              ],
-            ),
-
-
-            Column(
-              children: [
-                Row(
-                  children: [
-                    QMNumbers("12","Questions","17","Members"),
-                  ],
-                ),
-                Row(children: [
-                  Container( decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                    height:MediaQuery.of(context).size.height*0.05, width:MediaQuery.of(context).size.width*0.7 ,
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text("INF[X]",
-                          style: TextStyle(color: Colors.black),
-                        )
-                    ),
+joinGroup(context){
+  showModalBottomSheet(context: context, isScrollControlled: true,
+      builder: (context)=>SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child:Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top:MediaQuery.of(context).size.height*0.05,
+                  left:MediaQuery.of(context).size.width*0.05, ),
+                child: Row( children: [
+                  Column(
+                    children: [
+                      CircleAvatar(backgroundColor: Colors.black,
+                        radius: MediaQuery.of(context).size.height*0.06,
+                      ),
+                    ],
                   ),
 
-                ],)
-              ],
-            ),
 
-          ],),
-        ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          QMNumbers("12","Questions","17","Members"),
+                        ],
+                      ),
+                      Row(children: [
+                        Container( decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.all(Radius.circular(15))),
+                          height:MediaQuery.of(context).size.height*0.05, width:MediaQuery.of(context).size.width*0.7 ,
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text("INF[X]",
+                                style: TextStyle(color: Colors.black),
+                              )
+                          ),
+                        ),
 
-        //
+                      ],)
+                    ],
+                  ),
+
+                ],),
+              ),
+
+              //
 
 
-        Padding(
-          padding: EdgeInsets.only(
-            top:MediaQuery.of(context).size.height*0.05,
-            left:MediaQuery.of(context).size.width*0.07,
-            right:MediaQuery.of(context).size.width*0.05,
-          ),
-          child: Row(
-            children: [
-              Container( padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.02, ),
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                height:MediaQuery.of(context).size.height*0.15,
-                width: MediaQuery.of(context).size.width*0.88,
-                child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Text("gfgbf fksflksoldksoksp vğpğdğp dovkslkvcölsşcömsdmfkcmdsl",
-                        style: TextStyle(
-                            fontSize: 18)
-                    )
+              Padding(
+                padding: EdgeInsets.only(
+                  top:MediaQuery.of(context).size.height*0.05,
+                  left:MediaQuery.of(context).size.width*0.07,
+                  right:MediaQuery.of(context).size.width*0.05,
+                ),
+                child: Row(
+                  children: [
+                    Container( padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.02, ),
+                      decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      height:MediaQuery.of(context).size.height*0.15,
+                      width: MediaQuery.of(context).size.width*0.88,
+                      child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Text("gfgbf fksflksoldksoksp vğpğdğp dovkslkvcölsşcömsdmfkcmdsl",
+                              style: TextStyle(
+                                  fontSize: 18)
+                          )
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.05 ),
-          child: Btn("Join Group", Colors.deepPurple,0.07,0.8),
-        ),
+              Padding(
+                padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.05 ),
+                child: Btn("Join Group", Colors.deepPurple,0.07,0.8),
+              ),
 
 
-      ],);
-  }
+            ],) ,
+        ),
+      ));
 }
+
+
 
 class LinePainter extends CustomPainter{
   @override
