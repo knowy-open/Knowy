@@ -1,43 +1,48 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:new_project/screens/MemberListPage.dart';
+import 'package:new_project/screens/SignUpPage.dart';
+import 'package:new_project/screens/loginPage.dart';
 import 'package:new_project/screens/profile_settings.dart';
 
-class ProfileBar extends StatelessWidget{
+class ProfileBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [   Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.15),
-                child: statsBox(count: '142', title: 'Question'),
-              ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(''),
-                  )),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.15),
-                child: statsBox(count: '7', title: 'Groups'),
-              ),
-            ],
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+            child: statsBox(count: '142', title: 'Question'),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.07),
-                  child: But())
-            ],
-          )]);
+          SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width * 0.2,
+              child: CircleAvatar(
+                backgroundImage: AssetImage(''),
+              )),
+          Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+            child: statsBox(count: '7', title: 'Groups'),
+          ),
+        ],
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.07),
+              child: But())
+        ],
+      )
+    ]);
   }
-
 }
-
 
 class But extends StatelessWidget {
   @override
@@ -78,26 +83,38 @@ class But extends StatelessWidget {
             )));
   }
 }
+
 Widget statsBox({
+
   @required String count,
   @required String title,
+
 }) {
   return Container(
+    
     height: 98,
     width: 80,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(
-          count,
-          style: TextStyle(
-              fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          title,
-          style: TextStyle(fontSize: 14, color: Colors.black),
-        ),
+        TextButton(
+            onPressed: () {},
+            child: Column(
+              children: [
+                Text(
+                  count,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                ),
+              ],
+            ))
       ],
     ),
   );

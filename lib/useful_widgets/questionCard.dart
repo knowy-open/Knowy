@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'package:new_project/main.dart';
+import 'package:new_project/screens/FeedPage.dart';
 
 //parametreler alır hale gelmesi lazım
 //border rengi değişecek şekilde olmalı

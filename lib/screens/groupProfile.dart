@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:group_profile/questionCard.dart';
+import 'package:new_project/useful_widgets/profileBar.dart';
+import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
-import 'Btn_Add.dart';
-import 'bottomBar.dart';
-import 'package:group_profile/ProfileBar.dart';
+import 'package:new_project/useful_widgets/Btn_Add.dart';
+import 'package:new_project/useful_widgets/bottomBar.dart';
+
 
 void main() => runApp(MaterialApp(
   home: MyApp(),
