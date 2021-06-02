@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/screens/profile_settings.dart';
 import 'package:new_project/useful_widgets/profileBar.dart';
-import 'package:new_project/useful_widgets/Btn_Add.dart';
+import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 
 class Profile extends StatelessWidget {

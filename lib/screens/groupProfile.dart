@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_project/useful_widgets/profileBar.dart';
 import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
-import 'package:new_project/useful_widgets/Btn_Add.dart';
+import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 
 
@@ -28,10 +28,10 @@ class _MyAppState extends State<MyApp> {
         body:SingleChildScrollView( scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              profileView(),
+              ProfileView(),
              Padding(
                padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.05),
-               child: questionCard(),
+               child: QuestionCard(),
              ),
             ],
           ),
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class  profileView extends StatelessWidget {
+class  ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

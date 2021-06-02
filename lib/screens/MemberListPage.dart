@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../useful_widgets/ProfileCards.dart';
+import '../useful_widgets/profileCards.dart';
 import '../useful_widgets/bottomBar.dart';
-import '../useful_widgets/Btn_Add.dart';
+import '../useful_widgets/btn_Add.dart';
 
 class MemberList extends StatefulWidget{
   @override

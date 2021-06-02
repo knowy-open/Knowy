@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:new_project/screens/profile.dart';
 import 'package:new_project/useful_widgets/textfield.dart';
 import '../useful_widgets/bottomBar.dart';
 import '../useful_widgets/txtInformation.dart';
@@ -34,16 +35,32 @@ class Settings extends State<ProfileSettings> {
           child: ListView(
             children: [
               Center(
-                child: Stack(
+                child: Column(
                   children: [
+                    IconButton(
+                      padding: EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width * 0.9),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Profile()),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_rounded,
+                        color: Colors.black,
+                        size: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                    ),
+                 
                     Container(
+                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.5),
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 3,
+                              
                               color: Colors.black.withOpacity(0.1),
                               offset: Offset(0, 10))
                         ],
@@ -79,8 +96,7 @@ class Settings extends State<ProfileSettings> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  textField("Surname", 0.07, 0.8, 25, Colors.white
-                  ),
+                  textField("Surname", 0.07, 0.8, 25, Colors.white),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),

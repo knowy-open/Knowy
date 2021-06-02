@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:new_project/useful_widgets/Btn_Add.dart';
+import 'package:new_project/useful_widgets/btn.dart';
+import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 import 'package:new_project/useful_widgets/trustVoteCard.dart';
 
@@ -87,9 +88,14 @@ class TrustVote extends StatelessWidget {
                   VoteCard("Bahadır AKGÜN","sahip",),
                   VoteCard("Bikem DEMİRCİ","sahip"),
                   VoteCard("Elif Nur HANÇER","sahip"),
-                  VoteCard("4","a"),
-                  VoteCard("5","b"),
-                  VoteCard("6","c")
+                  
+                  Btn("Reset", Colors.deepPurple, 0.06,0.6),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                  Btn("Equalize", Colors.deepPurple, 0.06, 0.2),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                  Btn("Apply", Colors.deepPurple, 0.06, 0.2)
+
+
                 ],
               ))
             

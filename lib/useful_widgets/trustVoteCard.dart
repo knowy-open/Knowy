@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
-
+import 'package:new_project/useful_widgets/btn.dart';
 
 class VoteCard extends StatelessWidget {
   final String txtName;
   final String txtTitle;
 
-  VoteCard(this.txtName,this.txtTitle);
+  VoteCard(this.txtName, this.txtTitle);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      height: MediaQuery.of(context).size.height * 0.2,
-      width: MediaQuery.of(context).size.width * 1,
-      child: Card(
-          shadowColor: Colors.black,
-          color: Colors.grey[300],
-          child: Column(
-            children: [
-              Flexible(
-                fit: FlexFit.tight,
-                child: ListView(children: <Widget>[
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: AssetImage(""),
-                    ),
-                    title: Text(txtName),
-                    subtitle: Text(txtTitle),
-                  ),
-                  VoteState(),
-                ]),
-              )
-            ],
-          )),
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.2,
+          width: MediaQuery.of(context).size.width * 1,
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Card(
+                  child: Column(
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ListView(children: <Widget>[
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage(""),
+                        ),
+                        title: Text(txtName),
+                        subtitle: Text(txtTitle),
+                      ),
+                      VoteState(),
+                    ]),
+                  )
+                ],
+              ));
+            },
+          ),
+        ),
+      ],
     );
   }
 }

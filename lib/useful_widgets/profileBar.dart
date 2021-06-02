@@ -1,8 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:new_project/screens/MemberListPage.dart';
-import 'package:new_project/screens/SignUpPage.dart';
+import 'package:new_project/screens/memberListPage.dart';
+import 'package:new_project/screens/signUpPage.dart';
 import 'package:new_project/screens/loginPage.dart';
 import 'package:new_project/screens/profile_settings.dart';
 
