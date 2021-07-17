@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "405752671242",
+    "project_id": "knowy-3d052",
+    "storage_bucket": "knowy-3d052.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405752671242:android:33fd3781eb703db34b43f3",
+        "android_client_info": {
+          "package_name": "com.tau.knowy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405752671242-6rdfqpm380v1simvqj8iu80n7kd10nt6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEa4OHhtZZ314cwBEnRiQM9RqVUOcqNXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405752671242-6rdfqpm380v1simvqj8iu80n7kd10nt6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
