@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -24,12 +25,34 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>new_project</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
+
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+
+  <script>
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyBFYSHEngEwI2NovT9lExPARAyyyYUg3sg",
+      authDomain: "knowy-3d052.firebaseapp.com",
+      projectId: "knowy-3d052",
+      storageBucket: "knowy-3d052.appspot.com",
+      messagingSenderId: "405752671242",
+      appId: "1:405752671242:web:94127db38bb3454b4b43f3",
+      measurementId: "G-PSK8FL9E3Q"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -42,4 +65,5 @@
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>

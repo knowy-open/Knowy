@@ -139,18 +139,7 @@ class AnswerImages extends StatelessWidget {
                     child: Image.network(
                         "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTsMrpBjxQX8uJCryNVI6Gvc_jPd6QtzDJF8C-p3RQmcu269bKd")),
               ),
-              RaisedButton(
-                onPressed: () {},
-                child: Container(
-                    child: Image.network(
-                        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTsMrpBjxQX8uJCryNVI6Gvc_jPd6QtzDJF8C-p3RQmcu269bKd")),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                child: Container(
-                    child: Image.network(
-                        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTsMrpBjxQX8uJCryNVI6Gvc_jPd6QtzDJF8C-p3RQmcu269bKd")),
-              )
+             
             ],
           );
         }));
