@@ -23,36 +23,38 @@ class google_button extends StatelessWidget {
   }
 }
 
-
-
 class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
-      child: SafeArea(
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+            margin: const EdgeInsets.all(10.0),
+            alignment: Alignment.center,
         child: Column(children: [
           Row(mainAxisAlignment:MainAxisAlignment.center,
               children:[
-                SizedBox(height: MediaQuery.of(context).size.height * 0.4,
-                    width: MediaQuery.of(context).size.width *0.5,child: Image(image:AssetImage('assets/knowy.jpg')))] ),
+                SizedBox(height: size.height * 0.4,
+                    width: size.width *0.5,child: Image(image:AssetImage('assets/knowy.jpg')))] ),
           Padding(
             padding: EdgeInsets.only(),
             child: textField("E-Mail",0.07,0.8,25,Colors.white),
           ),
           Padding(
-            padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.03,),
+            padding: EdgeInsets.only(top:size.height*0.03,),
             child: textField("Password",0.07,0.8,25,Colors.white),
           ),
           Padding(
-            padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.03,),
+            padding: EdgeInsets.only(top:size.height*0.03,),
             child: Btn("Login", Colors.deepPurple,0.07,0.8),
           ),
           Padding(
-            padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.03,),
+            padding: EdgeInsets.only(top:size.height*0.03,),
             child: google_button(),
           ),
           Padding(
-            padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.03,),
+            padding: EdgeInsets.only(top:size.height*0.03,),
             child: Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(onPressed: (){},
@@ -63,13 +65,13 @@ class login extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.05,),
+            padding: EdgeInsets.only(bottom: size.height*0.05,),
             child: Row(mainAxisAlignment: MainAxisAlignment.center,
 
               children: [
                 Text("New around here?",style: TextStyle(fontSize:15),),
                 TextButton(onPressed: (){},
-                    child: Text("Sing up",
+                    child: Text("Sign up",
                       style: TextStyle(color: Colors.deepPurple, fontSize:15),)),
               ],
             ),
@@ -80,5 +82,4 @@ class login extends StatelessWidget {
     );
   }
 }
-
 
