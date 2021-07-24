@@ -53,7 +53,7 @@ class But extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            MaterialPageRoute(builder: (context) => ProfileSettingsPage()),
           );
         },
         textColor: Colors.white,

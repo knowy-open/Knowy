@@ -1,18 +1,23 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:new_project/screens/profile.dart';
+import 'package:new_project/services/auth.dart';
 import 'package:new_project/useful_widgets/textfield.dart';
 import '../useful_widgets/bottomBar.dart';
 import '../useful_widgets/txtInformation.dart';
 import '../useful_widgets/btn.dart';
 import '../useful_widgets/textfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class Home extends StatelessWidget {
+class ProfileSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "Profile Settings",
         theme: ThemeData.light(),
         home: ProfileSettings());
@@ -25,6 +30,21 @@ class ProfileSettings extends StatefulWidget {
 }
 
 class Settings extends State<ProfileSettings> {
+  String name;
+  String surname;
+  String bio;
+  String eMail;
+
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final eMailController = TextEditingController();
+  final bioController = TextEditingController();
+
+  final AuthService _auth = AuthService();
+  String documentId;
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,30 +57,15 @@ class Settings extends State<ProfileSettings> {
               Center(
                 child: Column(
                   children: [
-                    IconButton(
-                      padding: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.9),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Profile()),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colors.black,
-                        size: MediaQuery.of(context).size.height * 0.05,
-                      ),
-                    ),
-                 
                     Container(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.5),
+                      child: Image.network(''),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.5),
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              
                               color: Colors.black.withOpacity(0.1),
                               offset: Offset(0, 10))
                         ],
@@ -92,19 +97,79 @@ class Settings extends State<ProfileSettings> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  textField("Name", 0.07, 0.8, 25, Colors.white),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        icon: Icon(Icons.person),
+                        hintText: 'Name',
+                        labelText: 'Name',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      controller: nameController,
+                    ),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  textField("Surname", 0.07, 0.8, 25, Colors.white),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        icon: Icon(Icons.person),
+                        hintText: 'Surname',
+                        labelText: 'Surname',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      controller: surnameController,
+                    ),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  textField("E-Mail", 0.07, 0.8, 25, Colors.white),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        icon: Icon(Icons.mail),
+                        hintText: 'E-Mail',
+                        labelText: 'E-Mail',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      controller: eMailController,
+                    ),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  textField("Biography", 0.07, 0.8, 25, Colors.white),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        icon: Icon(Icons.person_pin_circle),
+                        hintText: 'Biography',
+                        labelText: 'Biography',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      controller: bioController,
+                    ),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
@@ -119,9 +184,28 @@ class Settings extends State<ProfileSettings> {
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Btn("Save", Colors.deepPurple, 0.07, 0.8),
-                  ),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: RaisedButton(
+                        onPressed: () {
+                          bio = bioController.text.toString();
+                          name = nameController.text.toString();
+
+                          FirebaseFirestore.instance
+                              .doc('/knowy/user/user/1')
+                              .update({"bio": "$bio"});
+                          FirebaseFirestore.instance
+                              .doc('/knowy/user/user/1')
+                              .update({"name": "$name"});
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        textColor: Colors.white,
+                        color: Colors.deepPurple,
+                        child: Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,

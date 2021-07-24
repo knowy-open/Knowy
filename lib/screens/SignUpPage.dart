@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:knowy/services/auth.dart';
+import 'package:new_project/services/auth.dart';
 import '../useful_widgets/textField.dart';
 import '../useful_widgets/btn.dart';
 
