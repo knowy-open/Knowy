@@ -17,6 +17,26 @@ class AuthService {
       //.map((FirebaseUser user) => _userFromFirebaseUser(user));
       .map(_userFromFirebaseUser);
   }
+  //en son yaptığımız signInWithEmailAndPassword fonksiyonunu  yorum olarak ekledim
+  
+  /*
+  Future signInWithEmilAndPassword(String email, String password) async {
+    try {
+      AuthResult result = await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .catchError((e) => print("bikem"));
+      final FirebaseUser user = result.user;
+      print(user.uid);
+      if (user.providerData == null) {
+        print("sdlfsdfsdf");
+      }
+      return user;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+  */
 
   // sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
