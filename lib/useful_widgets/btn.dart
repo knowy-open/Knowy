@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+ButtonStyle buttonStyle = ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+    ));
+
 
 class Btn extends StatelessWidget {
   final String buttonTxt;
