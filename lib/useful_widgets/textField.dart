@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 
+
+InputDecoration textForm = InputDecoration(
+    hintText: "E-mail",
+    labelStyle: TextStyle(
+      color: Colors.grey,
+    ),
+    fillColor: Colors.white,
+    filled: true,
+    focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+      color: Colors.white,
+    )),
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: Colors.white,
+      ),
+    ),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)));
+
 class textField extends StatelessWidget {
  final String textName;
  final Color textFieldBackgroundColor;
  final double textFieldHeight;
  final double textFieldWidth;
  final double borderRadius;
+ 
 
 
   textField( this.textName, this.textFieldHeight, this.textFieldWidth, this.borderRadius,this.textFieldBackgroundColor) ;
