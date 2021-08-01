@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/services/auth.dart';
-import '../useful_widgets/textField.dart';
-import '../useful_widgets/btn.dart';
+
+import 'feedPage.dart';
 
 class SignUp extends StatefulWidget {
-
-  final Function toggleView;
-  SignUp({ this.toggleView });
 
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignUp> {
-
+  
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordAgainController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _surnameController = TextEditingController();
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
@@ -42,36 +44,42 @@ class _SignInState extends State<SignUp> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: size.height * 0.05),
-                textField("Name", 0.07, 0.8, 25.0, Colors.white),
+                textField(_nameController,"Name", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                textField("Surname", 0.07, 0.8, 25.0, Colors.white),
+                textField(_surnameController, "Surname", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                TextFormField(
+                /*TextFormField(
                   validator: (val) => val.isEmpty ? 'Enter an email' : null,
                   onChanged: (val) {
                     setState(() => email = val);
                   },
-                ),
-                //textField("E-Mail", 0.07, 0.8, 25.0, Colors.white),
+                ),*/
+                textField(_emailController, "E-Mail", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                TextFormField(
-                  obscureText: true,
-                  validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
-                  onChanged: (val) {
-                    setState(() => password = val);
-                  },
-                ),
-                //textField("Password", 0.07, 0.8, 25.0, Colors.white),
+                textField(_passwordController, "Password", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                textField("Password", 0.07, 0.8, 25.0, Colors.white),
+                textField(_passwordAgainController, "Password", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),   
                 RaisedButton(
                   onPressed: () async {
                   if(_formKey.currentState.validate()){
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-                    if(result == null) {
-                      setState(() {
-                        error = 'Please supply a valid email';
+                    if(_passwordController.text == _passwordAgainController.text){
+                      dynamic result = await _auth.registerWithEmailAndPassword(_nameController.text,_surnameController.text , _emailController.text, _passwordController.text);
+                      if(result == null) {
+                        setState(() {
+                          error = 'Please supply a valid email';
+                          print(error);
+                        });
+                      }else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FeedPage()));
+                          }
+                    }else{
+                      setState((){
+                        error = 'Please enter the same Password.';
+                        print(error);
                       });
                     }
                   }
@@ -107,3 +115,62 @@ class _SignInState extends State<SignUp> {
     );
   }
 }
+
+
+class textField extends StatelessWidget {
+  final TextEditingController controllerName;
+  final String textName;
+  final Color textFieldBackgroundColor;
+  final double textFieldHeight;
+  final double textFieldWidth;
+  final double borderRadius;
+
+  textField(
+    this.controllerName,
+    this.textName,
+    this.textFieldHeight,
+    this.textFieldWidth,
+    this.borderRadius,
+    this.textFieldBackgroundColor,
+  );
+  // height: 0.07  width: 0.8
+  // borderRadius: 15.0 for bottom sheet , 25.0 for other text field
+
+  @override
+  Widget build(BuildContext context) {
+    bool b;
+    if (textName == 'Password' ||
+        textName == 'New Password' ||
+        textName == 'CurrentPassword') {
+      b = true;
+    } else
+      b = false;
+
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * textFieldHeight,
+      width: MediaQuery.of(context).size.width * textFieldWidth,
+      child: TextField(
+        controller: controllerName,
+        obscureText: b,
+        autofocus: false,
+        maxLines: 1,
+        decoration: InputDecoration(
+          fillColor: textFieldBackgroundColor,
+          filled: true,
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+              borderSide: BorderSide(color: textFieldBackgroundColor)),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: textFieldBackgroundColor),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          hintText: textName,
+          labelStyle: TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
