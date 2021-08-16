@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:knowy/services/database.dart';
+import '../services/database.dart';
 import '../useful_widgets/btn.dart';
 import '../useful_widgets/bottomBar.dart';
 import 'feedPage.dart';
