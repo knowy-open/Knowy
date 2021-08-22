@@ -9,7 +9,7 @@ class AuthService {
 
   // create user obj based on firebase user
   UserKnowy _userFromFirebaseUser(User user) {
-    return user != null ? UserKnowy(uid: user.uid) : null;
+    return user != null ? UserKnowy.withId(uid: user.uid) : null;
   }
 
   // auth change user stream
