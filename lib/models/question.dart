@@ -1,6 +1,6 @@
 import 'package:new_project/models/group.dart';
+import 'package:new_project/models/option.dart';
 import 'package:new_project/models/user.dart';
-import 'option.dart';
 
 class QuestionKnowy {
   int qid;
@@ -27,15 +27,7 @@ class QuestionKnowy {
     this.answerCount++;
   }
 
-  void calculateResult(QuestionKnowy question, GroupKnowy group) {
-    question.options.forEach((element) {
-      group.trustPointsList.forEach((key, value) {
-        if (answers.containsKey(key) && answers[key] == element) {
-          element.point += value;
-        }
-      });
-    });
-  }
+  void calculateResult(QuestionKnowy question, GroupKnowy group) {}
 
   //question.answers.keys.contains(group.trustPointsList.keys(element))
 
