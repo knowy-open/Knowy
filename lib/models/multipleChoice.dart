@@ -12,7 +12,6 @@ class MultipleChoice extends Question {
 
   MultipleChoice(
     this.answers,
-    this._result,
   ) {}
 
   void calculateResult(QuestionKnowy question, GroupKnowy group) {

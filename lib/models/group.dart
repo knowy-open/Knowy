@@ -10,10 +10,10 @@ class GroupKnowy {
   List<QuestionKnowy> questionsList;
   int minNumberOfVotesEvaluation;
   int maxTimeForVoting;
-  Map<int, int> trustPointsList; // int = UserKnowy, int = TrustPoints
+  Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
   Map<UserKnowy, Map<UserKnowy, int>> trustPointsVotingList; // int=Trust Point
 
-  GroupKnowy(this.gid, this.name, this.usersList);
+  GroupKnowy(this.gid, this.name, this.usersList, this.trustPointsList);
 
   List<QuestionKnowy> getAllQuestions() {
     return questionsList;
@@ -32,4 +32,7 @@ class GroupKnowy {
     this.minNumberOfVotesEvaluation = minNumberOfVotesForEvaluation;
     return minNumberOfVotesEvaluation;
   }
+
+  //Trust Point dağıtımı 
+
 }

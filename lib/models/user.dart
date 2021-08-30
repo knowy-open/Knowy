@@ -1,3 +1,5 @@
+import 'package:new_project/models/group.dart';
+
 class UserKnowy {
   final String uid;
   String email;
@@ -5,10 +7,10 @@ class UserKnowy {
   String surname;
   String bio;
   String password;
-  List<String> groupsList; //groupId ?
+  List<GroupKnowy> groupsList; //groupId ?
   String profilePicture;
 
-  UserKnowy.withId({this.uid});
+  UserKnowy.withId(this.uid);
 
   UserKnowy(this.email, this.name, this.surname, this.bio, this.groupsList,
       this.profilePicture, this.password, this.uid);
@@ -42,5 +44,11 @@ class UserKnowy {
 
   void deleteAccount(String uid, String password, String reason) {
     //
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "id: " + uid + name ;
   }
 }
