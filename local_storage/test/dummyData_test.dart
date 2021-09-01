@@ -5,9 +5,9 @@ import '../dummyData.dart';
 
 void main() {
   DummyData data = DummyData();
- print(data.users.toString());
- //data.questions.forEach((element) {
- //  element.calculateResult(this, group)
-//  })
-// Sorunun hangi gruba ait olduğu bilgisi eksik?
+  print(data.users.toString());
+  data.questions.forEach((element) {
+    element.calculateResult(element.group);
+  });
+//Sorunun hangi gruba ait olduğu bilgisi eksik?
 }

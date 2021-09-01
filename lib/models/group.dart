@@ -1,3 +1,4 @@
+import 'package:new_project/models/option.dart';
 import 'package:new_project/models/question.dart';
 import 'package:new_project/models/user.dart';
 
@@ -33,6 +34,6 @@ class GroupKnowy {
     return minNumberOfVotesEvaluation;
   }
 
-  //Trust Point dağıtımı 
+  //Trust Point dağıtımı
 
 }

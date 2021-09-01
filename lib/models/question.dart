@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:new_project/models/group.dart';
 import 'package:new_project/models/option.dart';
 import 'package:new_project/models/user.dart';
@@ -14,8 +16,8 @@ class QuestionKnowy {
   UserKnowy creator;
   bool activeQuestion;
   List<Option> options;
-  QuestionKnowy(this.activeQuestion, this.creator, this.deadline, this.options,
-      this.questionMessage, this.answers, this.result);
+  QuestionKnowy(this.activeQuestion, this.creator, this.group, this.deadline,
+      this.options, this.questionMessage, this.answers, this.result);
 
   QuestionKnowy createQuestion() {
     dateCreated = DateTime.now();
@@ -27,26 +29,33 @@ class QuestionKnowy {
     this.answerCount++;
   }
 
-  void calculateResult(QuestionKnowy question, GroupKnowy group) {}
+  void calculateResult(GroupKnowy group) {
+    List<int> points;
+    this.options.forEach((element) {
+      group.trustPointsList.forEach((key, value) {
+        if (answers.containsKey(key) && answers[key] == element) {
+          element.point += value;
+        }
+      });
+    });
+    int count = 0;
 
-  //question.answers.keys.contains(group.trustPointsList.keys(element))
+    this.options.forEach((element) {
+      points.add(element.point);
 
-  /*
-    işaretlediği soruları bulmak lazım
-    ilk userların işaretlediği optionları seçmek gerek.
-    questiondan answerları çeker 
-    answerda userknowy i group userknowy e eşlemesi gerekir.
-    for each de tüm userknowy de (Option*trustpointi)
-    */
-}
+      if (points.reduce(max) > count) {
+        count = points.reduce(max);
+        result = element;
+      }
+    });
+  }
 
-void addAnswer(UserKnowy userKnowy, QuestionKnowy question) {
-  // answers.
-}
-
+  void addAnswer(UserKnowy userKnowy, QuestionKnowy question) {
+    // answers.
+  }
 
 //incoming features
- /*
+  /*
   void editQuestion(
       String questionMessage, List<Option> options, DateTime deadline) {
     //to check required answerCount
@@ -62,4 +71,5 @@ void addAnswer(UserKnowy userKnowy, QuestionKnowy question) {
 
   
 }
-*/ 
+*/
+}
