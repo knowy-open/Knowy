@@ -14,15 +14,26 @@ class MultipleChoice extends Question {
   int mid;
   MultipleChoice(this.mid, this.answers, this.group, this.options);
 
+  Map<String, Option> getUserKnowyId(Map<UserKnowy, Option> answersList) {
+    Map<String, Option> answersWithId;
+    answersList.forEach((key, value) {
+      answersWithId[key.uid] = value;
+    });
+    return answersWithId;
+  }
+
   void calculateResult(GroupKnowy group) {
     List<int> points = new List();
     this.options.forEach((element) {
       group.trustPointsList.forEach((key, value) {
-        //kod burdaki if bloğuna girmiyor. key value ların type ı eşleşmiyor.
-        //if (answers.containsKey(key) && answers[key] == element) {
-        element.point += value;
-
-        //}
+        //Kod buradaki fonksiyonda null hatası veriyor. if'e giremedik. 
+        Map<String, Option> answersWithId = getUserKnowyId(this.answers);
+        if (answersWithId.containsKey(key.toString()) &&
+            answersWithId[key].equals(element)) {
+          element.point += value;
+          points.add(element.point);
+          print(points);
+        }
       });
     });
     int count = 0;
