@@ -1,17 +1,19 @@
 import 'dart:math';
 
 import 'package:new_project/models/group.dart';
+import 'package:new_project/models/membership.dart';
 import 'package:new_project/models/option.dart';
 import 'package:new_project/models/question.dart';
 import 'package:new_project/models/user.dart';
 import 'package:new_project/screens/question.dart';
 
 class MultipleChoice extends Question {
-  Map<UserKnowy, Option> answers;
+  Map<MembershipKnowy, Option> answers;
   Option _result;
   GroupKnowy group;
   List<Option> options;
   int mid;
+
   MultipleChoice(this.mid, this.answers, this.group, this.options);
 
   Map<String, Option> getUserKnowyId(Map<UserKnowy, Option> answersList) {
@@ -23,6 +25,7 @@ class MultipleChoice extends Question {
   }
 
   void calculateResult(GroupKnowy group) {
+    /*
     List<int> points = new List();
     this.options.forEach((element) {
       group.trustPointsList.forEach((key, value) {
@@ -46,6 +49,7 @@ class MultipleChoice extends Question {
         _result = element;
       }
     });
+    */
   }
 
   void saveAnswers() {}

@@ -1,4 +1,5 @@
 import 'package:new_project/models/group.dart';
+import 'package:new_project/models/membership.dart';
 
 class UserKnowy {
   final String uid;
@@ -7,12 +8,12 @@ class UserKnowy {
   String surname;
   String bio;
   String password;
-  List<GroupKnowy> groupsList; //groupId ?
+  List<MembershipKnowy> membershipsList; //groupId ?
   String profilePicture;
 
   UserKnowy.withId(this.uid);
 
-  UserKnowy(this.email, this.name, this.surname, this.bio, this.groupsList,
+  UserKnowy(this.email, this.name, this.surname, this.bio, this.membershipsList,
       this.profilePicture, this.password, this.uid);
 
   bool login(String email, String password) {}
@@ -20,11 +21,10 @@ class UserKnowy {
   bool logout(String uid) {}
 
   void editProfile(
-      String name, String surname, String bio, String profilePicture) {
+      String name, String surname, String bio) {
     this.name = name;
     this.surname = surname;
     this.bio = bio;
-    this.profilePicture = profilePicture;
   }
 
   void changePassword(String oldPassword, String password) {
@@ -44,6 +44,13 @@ class UserKnowy {
 
   void deleteAccount(String uid, String password, String reason) {
     //
+  }
+
+  void editUserProfile(String name, String surname, String bio){
+    this.name = name;
+    this.surname = surname;
+    this.bio = bio;
+
   }
 
   @override

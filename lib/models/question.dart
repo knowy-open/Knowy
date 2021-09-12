@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:new_project/models/group.dart';
+import 'package:new_project/models/membership.dart';
 import 'package:new_project/models/option.dart';
 import 'package:new_project/models/user.dart';
 
@@ -9,13 +10,14 @@ class QuestionKnowy {
   GroupKnowy group;
   String questionMessage;
   int answerCount = 0;
-  Map<UserKnowy, Option> answers; //Option -> RadioButtonInputElement olabilir
+  Map<MembershipKnowy, Option> answers; //Option -> RadioButtonInputElement olabilir
   Option result;
   DateTime dateCreated;
   DateTime deadline;
-  UserKnowy creator;
+  MembershipKnowy creator;
   bool activeQuestion;
   List<Option> options;
+
   QuestionKnowy(this.activeQuestion, this.creator, this.group, this.deadline,
       this.options, this.questionMessage, this.answers, this.result);
 
@@ -30,6 +32,7 @@ class QuestionKnowy {
   }
 
   void calculateResult(GroupKnowy group) {
+    /*
     List<int> points;
     this.options.forEach((element) {
       group.trustPointsList.forEach((key, value) {
@@ -48,6 +51,7 @@ class QuestionKnowy {
         result = element;
       }
     });
+    */
   }
 
   void addAnswer(UserKnowy userKnowy, QuestionKnowy question) {

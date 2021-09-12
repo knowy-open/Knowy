@@ -1,27 +1,29 @@
+import 'package:new_project/models/membership.dart';
 import 'package:new_project/models/option.dart';
 import 'package:new_project/models/question.dart';
 import 'package:new_project/models/user.dart';
 
 class GroupKnowy {
   final String gid;
-  final String name;
+  String name;
   String bio;
   String photo;
-  final List<UserKnowy> usersList;
+  List<MembershipKnowy> membersList;
   List<QuestionKnowy> questionsList;
   int minNumberOfVotesEvaluation;
   int maxTimeForVoting;
-  Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
-  Map<UserKnowy, Map<UserKnowy, int>> trustPointsVotingList; // int=Trust Point
+  //Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
+  Map<MembershipKnowy, Map<MembershipKnowy, int>>
+      trustPointsVotings; // int=Trust Point
 
-  GroupKnowy(this.gid, this.name, this.usersList, this.trustPointsList);
+  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings);
 
   List<QuestionKnowy> getAllQuestions() {
     return questionsList;
   }
 
-  List<UserKnowy> getAllUsers() {
-    return usersList;
+  List<MembershipKnowy> getAllUsers() {
+    return membersList;
   }
 
   int setMaxTimeForVoting(int newMaxTime) {
@@ -32,6 +34,19 @@ class GroupKnowy {
   int setMinNumberOfVotesForEvaluation(int minNumberOfVotesForEvaluation) {
     this.minNumberOfVotesEvaluation = minNumberOfVotesForEvaluation;
     return minNumberOfVotesEvaluation;
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "group: " + gid + " " + name;
+  }
+
+  bool bioValidator(String bio) {
+    if (bio.length > 240) {
+      return false;
+    }
+    return true;
   }
 
   //Trust Point dağıtımı

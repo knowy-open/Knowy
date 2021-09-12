@@ -6,6 +6,7 @@ import 'package:new_project/models/user.dart';
 import 'package:new_project/models/user.dart';
 
 class DummyData {
+  /*
   List<UserKnowy> users = [
     UserKnowy(
         "bahadır@gmail.com",
@@ -142,5 +143,5 @@ class DummyData {
     Option(679, "option 2", 3),
     Option(671, "option 3", 3),
     Option(677, "option 4", 3),
-  ];
+  ];*/
 }
