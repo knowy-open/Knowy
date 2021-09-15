@@ -74,5 +74,13 @@ void main() {
   user.editProfile("name", "surname", "bioo");
   print(usersList.toString());
 
+  GroupKnowy group2 = user.createGroup("4", "acabaolcakmi");
+  print(group2.membersList);
+  MultipleChoice multipleChoice = membership1.startQuestion(
+    [Option(2, "a", 5), Option(3, "inputdenem", 5)],
+  );
+  group.questionsList.add(multipleChoice);
+  print(multipleChoice);
+  print(group.getAllQuestions());
 //Sorunun hangi gruba ait olduğu bilgisi eksik?
 }

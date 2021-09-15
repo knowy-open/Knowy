@@ -20,8 +20,7 @@ class UserKnowy {
 
   bool logout(String uid) {}
 
-  void editProfile(
-      String name, String surname, String bio) {
+  void editProfile(String name, String surname, String bio) {
     this.name = name;
     this.surname = surname;
     this.bio = bio;
@@ -34,8 +33,9 @@ class UserKnowy {
     }
   }
 
-  void createGroup() {
-    //
+  GroupKnowy createGroup(String gid, String name) {
+    MembershipKnowy membershipKnowy = new MembershipKnowy(null, null, this);
+    return GroupKnowy(gid, name, [membershipKnowy], {});
   }
 
   void joinGroup() {
@@ -46,16 +46,15 @@ class UserKnowy {
     //
   }
 
-  void editUserProfile(String name, String surname, String bio){
+  void editUserProfile(String name, String surname, String bio) {
     this.name = name;
     this.surname = surname;
     this.bio = bio;
-
   }
 
   @override
   String toString() {
     // TODO: implement toString
-    return "id: " + uid + name ;
+    return "id: " + uid + name;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:new_project/models/membership.dart';
+import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
 import 'package:new_project/models/question.dart';
 import 'package:new_project/models/user.dart';
@@ -9,7 +10,8 @@ class GroupKnowy {
   String bio;
   String photo;
   List<MembershipKnowy> membersList;
-  List<QuestionKnowy> questionsList;
+  List<MultipleChoice> questionsList =
+      List<MultipleChoice>.empty(growable: true);
   int minNumberOfVotesEvaluation;
   int maxTimeForVoting;
   //Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
@@ -18,11 +20,11 @@ class GroupKnowy {
 
   GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings);
 
-  List<QuestionKnowy> getAllQuestions() {
+  List<MultipleChoice> getAllQuestions() {
     return questionsList;
   }
 
-  List<MembershipKnowy> getAllUsers() {
+  List<MembershipKnowy> getAllMembers() {
     return membersList;
   }
 

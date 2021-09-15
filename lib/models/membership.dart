@@ -1,46 +1,41 @@
-
 import 'package:new_project/models/group.dart';
+import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
-import 'package:new_project/models/question.dart';
+import 'dart:math';
 import 'package:new_project/models/user.dart';
 
-class MembershipKnowy{
-
- int trustPoint = 0;
- final GroupKnowy group;
- final UserKnowy user;
+class MembershipKnowy {
+  int trustPoint = 0;
+  final GroupKnowy group;
+  final UserKnowy user;
 
   MembershipKnowy(this.trustPoint, this.group, this.user);
 
-  QuestionKnowy startQuestion(GroupKnowy group){
-    
+  MultipleChoice startQuestion(List<Option> options) {
+    MultipleChoice multipleChoice = new MultipleChoice(5, null, group, options);
+    return multipleChoice;
   }
 
-  Option voteQuestion(QuestionKnowy){
+  Option voteQuestion(QuestionKnowy) {}
 
-  }
+  Map<MembershipKnowy, int> voteTrustPoint() {} //MembershipList alacak Grouptan
 
-  Map<MembershipKnowy, int> voteTrustPoint(){
-
-  } //MembershipList alacak Grouptan
-
-  void leaveGroup(GroupKnowy group){
+  void leaveGroup(GroupKnowy group) {
     user.membershipsList.remove(this);
     group.membersList.remove(this);
   }
 
-  void editGroupProfile(GroupKnowy group, String name, String bio){
+  void editGroupProfile(GroupKnowy group, String name, String bio) {
     group.name = name;
-    if(group.bioValidator(bio)){
-          group.bio = bio;
-    }else{
+    if (group.bioValidator(bio)) {
+      group.bio = bio;
+    } else {
       print("240 karakterden uzun olamaz!");
     }
   }
 
-String toString() {
+  String toString() {
     // TODO: implement toString
     return "membership: " + user.toString() + trustPoint.toString();
   }
-
 }

@@ -7,14 +7,15 @@ import 'package:new_project/models/question.dart';
 import 'package:new_project/models/user.dart';
 import 'package:new_project/screens/question.dart';
 
-class MultipleChoice extends Question {
+class MultipleChoice {
   Map<MembershipKnowy, Option> answers;
   Option _result;
   GroupKnowy group;
   List<Option> options;
   int mid;
 
-  MultipleChoice(this.mid, this.answers, this.group, this.options);
+  MultipleChoice(this.mid, this.answers, this.group,
+      this.options); //super(creator, question explanation, deadline,boolean isActiveQuestion)
 
   Map<String, Option> getUserKnowyId(Map<UserKnowy, Option> answersList) {
     Map<String, Option> answersWithId;
@@ -52,7 +53,12 @@ class MultipleChoice extends Question {
     */
   }
 
-  void saveAnswers() {}
+ 
 
   Option get result => _result;
+
+  String toString() {
+    // TODO: implement toString
+    return "mid: " + mid.toString();
+  }
 }
