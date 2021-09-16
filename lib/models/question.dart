@@ -68,12 +68,8 @@ class QuestionKnowy {
      // this.deadline = deadline;
     }
   }
-
-  void deleteQuestion(int qid){
-
-  }
+*/
 
   
 }
-*/
-}
+

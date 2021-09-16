@@ -33,9 +33,9 @@ class UserKnowy {
     }
   }
 
-  GroupKnowy createGroup(String gid, String name) {
+  GroupKnowy createGroup(String gid, String name, int maxTimeForVoting, int minNumberOfVotesEvaluation) {
     MembershipKnowy membershipKnowy = new MembershipKnowy(null, null, this);
-    return GroupKnowy(gid, name, [membershipKnowy], {});
+    return GroupKnowy(gid, name, [membershipKnowy], {}, maxTimeForVoting, minNumberOfVotesEvaluation);
   }
 
   void joinGroup() {

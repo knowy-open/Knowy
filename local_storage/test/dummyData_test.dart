@@ -40,7 +40,7 @@ void main() {
     membership2: ({membership: 0, membership1: 0, membership2: 0})
   };
 
-  group = new GroupKnowy("1", "knowy", membersList, trustPointsVotings);
+  group = new GroupKnowy("1", "knowy", membersList, trustPointsVotings, 12, 0);
   // group1 = new GroupKnowy("2", "notKnowy", membersList1, this.trustPointsVotingList);
 
   List<UserKnowy> usersList = [user, user1, user2];
@@ -56,31 +56,29 @@ void main() {
     membership2: option1
   };
 
-  MultipleChoice question1 = new MultipleChoice(1, answers1, group, options1);
+  //MultipleChoice question1 = new MultipleChoice(true, 1, answers1, group, options1);
 
   print(usersList.toString());
   print(membersList.toString());
   print(group.toString());
 
-  //print(user.membershipsList[0]);
-
-  membership2.leaveGroup(group);
+  //membership2.leaveGroup(group);
   print(membersList.toString());
-  //print(user.membershipsList);
 
-  membership.editGroupProfile(group, "name", "yeni bio");
+  //membership.editGroupProfile(group, "name", "yeni bio");
+  //group.setMinNumberOfVotesForEvaluation(5);
   print(group.toString());
 
-  user.editProfile("name", "surname", "bioo");
+  //user.editProfile("name", "surname", "bioo");
   print(usersList.toString());
 
-  GroupKnowy group2 = user.createGroup("4", "acabaolcakmi");
+  GroupKnowy group2 = user.createGroup("4", "acabaolcakmi", 2, 1);
   print(group2.membersList);
   MultipleChoice multipleChoice = membership1.startQuestion(
-    [Option(2, "a", 5), Option(3, "inputdenem", 5)],
+    [Option(2, "a", 5), Option(3, "inputdenem", 5)],DateTime.now(),"bu bir multiplechoice mıdır?"
   );
   group.questionsList.add(multipleChoice);
-  print(multipleChoice);
+  //membership1.deleteQuestion(group, multipleChoice);
   print(group.getAllQuestions());
-//Sorunun hangi gruba ait olduğu bilgisi eksik?
+
 }

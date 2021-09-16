@@ -13,12 +13,12 @@ class GroupKnowy {
   List<MultipleChoice> questionsList =
       List<MultipleChoice>.empty(growable: true);
   int minNumberOfVotesEvaluation;
-  int maxTimeForVoting;
+  int maxTimeForVoting = 24;
   //Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
   Map<MembershipKnowy, Map<MembershipKnowy, int>>
       trustPointsVotings; // int=Trust Point
 
-  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings);
+  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings,this.maxTimeForVoting, this.minNumberOfVotesEvaluation);
 
   List<MultipleChoice> getAllQuestions() {
     return questionsList;
@@ -34,14 +34,18 @@ class GroupKnowy {
   }
 
   int setMinNumberOfVotesForEvaluation(int minNumberOfVotesForEvaluation) {
-    this.minNumberOfVotesEvaluation = minNumberOfVotesForEvaluation;
+    if(membersList.length <= 3){
+      this.minNumberOfVotesEvaluation = membersList.length;
+    }else{
+      this.minNumberOfVotesEvaluation = minNumberOfVotesForEvaluation;
+    }
     return minNumberOfVotesEvaluation;
   }
 
   @override
   String toString() {
     // TODO: implement toString
-    return "group: " + gid + " " + name;
+    return "group: " + gid + " " + name + " " + maxTimeForVoting.toString() + " " + minNumberOfVotesEvaluation.toString();
   }
 
   bool bioValidator(String bio) {

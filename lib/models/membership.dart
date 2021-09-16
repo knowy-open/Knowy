@@ -11,8 +11,8 @@ class MembershipKnowy {
 
   MembershipKnowy(this.trustPoint, this.group, this.user);
 
-  MultipleChoice startQuestion(List<Option> options) {
-    MultipleChoice multipleChoice = new MultipleChoice(5, null, group, options);
+  MultipleChoice startQuestion(List<Option> options,DateTime deadline, String questionMessage ) {
+    MultipleChoice multipleChoice = new MultipleChoice(true, this, group, deadline, options, questionMessage, null, null, 5);
     return multipleChoice;
   }
 
@@ -32,6 +32,12 @@ class MembershipKnowy {
     } else {
       print("240 karakterden uzun olamaz!");
     }
+  }
+
+  void deleteQuestion(GroupKnowy group, MultipleChoice question){
+      if(identical(question.creator, this)){
+        group.getAllQuestions().remove(question);
+      }
   }
 
   String toString() {
