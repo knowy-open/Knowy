@@ -3,7 +3,7 @@ import 'package:new_project/models/group.dart';
 import 'package:new_project/models/membership.dart';
 import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
-import 'package:new_project/models/question.dart';
+
 import 'package:new_project/models/user.dart';
 import '../dummyData.dart';
 
@@ -25,8 +25,8 @@ void main() {
   UserKnowy user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun",
       "bio", [membership2], "pp", "password", "3");
 
-  membership = new MembershipKnowy(0, group, user);
-  membership1 = new MembershipKnowy(0, group, user1);
+  membership = new MembershipKnowy(15, group, user);
+  membership1 = new MembershipKnowy(15, group, user1);
   membership2 = new MembershipKnowy(0, group, user2);
   membership3 = new MembershipKnowy(0, group1, user);
   membership4 = new MembershipKnowy(0, group1, user1);
@@ -56,8 +56,6 @@ void main() {
     membership2: option1
   };
 
-  //MultipleChoice question1 = new MultipleChoice(true, 1, answers1, group, options1);
-
   print(usersList.toString());
   print(membersList.toString());
   print(group.toString());
@@ -71,14 +69,17 @@ void main() {
 
   //user.editProfile("name", "surname", "bioo");
   print(usersList.toString());
-
+  Option option = new Option(2, "a", 5);
   GroupKnowy group2 = user.createGroup("4", "acabaolcakmi", 2, 1);
   print(group2.membersList);
   MultipleChoice multipleChoice = membership1.startQuestion(
-    [Option(2, "a", 5), Option(3, "inputdenem", 5)],DateTime.now(),"bu bir multiplechoice mıdır?"
-  );
+      [option, Option(3, "inputdenem", 5)],
+      DateTime.now(),
+      "bu bir multiplechoice mıdır?");
   group.questionsList.add(multipleChoice);
   //membership1.deleteQuestion(group, multipleChoice);
   print(group.getAllQuestions());
-
+  membership1.voteQuestion(membership1, multipleChoice, option);
+  membership2.voteQuestion(membership, multipleChoice, option);
+  print(multipleChoice.calculateResult(group));
 }

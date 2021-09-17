@@ -1,6 +1,7 @@
 import 'package:new_project/models/group.dart';
 import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
+import 'package:new_project/models/question.dart';
 import 'dart:math';
 import 'package:new_project/models/user.dart';
 
@@ -11,12 +12,19 @@ class MembershipKnowy {
 
   MembershipKnowy(this.trustPoint, this.group, this.user);
 
-  MultipleChoice startQuestion(List<Option> options,DateTime deadline, String questionMessage ) {
-    MultipleChoice multipleChoice = new MultipleChoice(true, this, group, deadline, options, questionMessage, null, null, 5);
+  MultipleChoice startQuestion(
+      List<Option> options, DateTime deadline, String questionMessage) {
+    MultipleChoice multipleChoice = new MultipleChoice(
+        true, this, group, deadline, options, questionMessage, Map(), null, 5);
     return multipleChoice;
   }
 
-  Option voteQuestion(QuestionKnowy) {}
+  void voteQuestion(MembershipKnowy membership, MultipleChoice multipleChoice,
+      Option option) {
+    if (multipleChoice.options.contains(option)) {
+      multipleChoice.answers[membership] = option;
+    }
+  }
 
   Map<MembershipKnowy, int> voteTrustPoint() {} //MembershipList alacak Grouptan
 
@@ -34,10 +42,10 @@ class MembershipKnowy {
     }
   }
 
-  void deleteQuestion(GroupKnowy group, MultipleChoice question){
-      if(identical(question.creator, this)){
-        group.getAllQuestions().remove(question);
-      }
+  void deleteQuestion(GroupKnowy group, MultipleChoice question) {
+    if (identical(question.creator, this)) {
+      group.getAllQuestions().remove(question);
+    }
   }
 
   String toString() {

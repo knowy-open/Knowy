@@ -10,7 +10,8 @@ class QuestionKnowy {
   GroupKnowy group;
   String questionMessage;
   int answerCount = 0;
-  Map<MembershipKnowy, Option> answers; //Option -> RadioButtonInputElement olabilir
+  Map<MembershipKnowy, Option>
+      answers; //Option -> RadioButtonInputElement olabilir
   Option result;
   DateTime dateCreated;
   DateTime deadline;
@@ -29,6 +30,14 @@ class QuestionKnowy {
   //to see how many people answered.
   void answerQuestion() {
     this.answerCount++;
+  }
+
+  bool isActiveQuestion() {
+    if (deadline.compareTo(DateTime.now()) != 0) {
+      return true;
+    }
+    activeQuestion = false;
+    return false;
   }
 
   void calculateResult(GroupKnowy group) {
@@ -70,6 +79,12 @@ class QuestionKnowy {
   }
 */
 
-  
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "Question Explanation: " +
+        questionMessage +
+        "Active Question: " +
+        activeQuestion.toString();
+  }
 }
-

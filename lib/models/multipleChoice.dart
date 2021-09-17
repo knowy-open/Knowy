@@ -8,9 +8,8 @@ import 'package:new_project/models/user.dart';
 import 'package:new_project/screens/question.dart';
 
 class MultipleChoice extends QuestionKnowy {
-  
   int mid;
-
+  Map<Option, int> results = {};
   MultipleChoice(
       bool activeQuestion,
       MembershipKnowy creator,
@@ -32,7 +31,21 @@ class MultipleChoice extends QuestionKnowy {
     return answersWithId;
   }
 
-  void calculateResult(GroupKnowy group) {
+  Map<Option, int> calculateResult(GroupKnowy group) {
+    answers.forEach((key, value) {
+      if (results.containsKey(value)) {
+        value.point += key.trustPoint;
+        results.update(value, (value) {
+          value += key.trustPoint;
+          return value;
+        });
+      } else {
+        value.point += key.trustPoint;
+        results[value] = key.trustPoint;
+      }
+    });
+    return results;
+
     /*
     List<int> points = new List();
     this.options.forEach((element) {
