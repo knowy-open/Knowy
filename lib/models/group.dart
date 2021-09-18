@@ -9,16 +9,27 @@ class GroupKnowy {
   String name;
   String bio;
   String photo;
-  List<MembershipKnowy> membersList;
+  List<MembershipKnowy> membersList = List.empty(growable: true);
   List<MultipleChoice> questionsList =
       List<MultipleChoice>.empty(growable: true);
   int minNumberOfVotesEvaluation;
   int maxTimeForVoting = 24;
-  //Map<int, int> trustPointsList; // UserKnowy, int = TrustPoints
+
+  Map<MembershipKnowy, int> trustPointsList =
+      {}; // UserKnowy, int = TrustPoints
   Map<MembershipKnowy, Map<MembershipKnowy, int>>
       trustPointsVotings; // int=Trust Point
 
-  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings,this.maxTimeForVoting, this.minNumberOfVotesEvaluation);
+  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings,
+      this.maxTimeForVoting, this.minNumberOfVotesEvaluation);
+
+  //required for initialize.
+  Map<MembershipKnowy, int> getAllTrustPoints() {
+    membersList.forEach((element) {
+      trustPointsList[element] = 0;
+    });
+    return trustPointsList;
+  }
 
   List<MultipleChoice> getAllQuestions() {
     return questionsList;
@@ -34,9 +45,9 @@ class GroupKnowy {
   }
 
   int setMinNumberOfVotesForEvaluation(int minNumberOfVotesForEvaluation) {
-    if(membersList.length <= 3){
+    if (membersList.length <= 3) {
       this.minNumberOfVotesEvaluation = membersList.length;
-    }else{
+    } else {
       this.minNumberOfVotesEvaluation = minNumberOfVotesForEvaluation;
     }
     return minNumberOfVotesEvaluation;
@@ -45,7 +56,14 @@ class GroupKnowy {
   @override
   String toString() {
     // TODO: implement toString
-    return "group: " + gid + " " + name + " " + maxTimeForVoting.toString() + " " + minNumberOfVotesEvaluation.toString();
+    return "group: " +
+        gid +
+        " " +
+        name +
+        " " +
+        maxTimeForVoting.toString() +
+        " " +
+        minNumberOfVotesEvaluation.toString();
   }
 
   bool bioValidator(String bio) {

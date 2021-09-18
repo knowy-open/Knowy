@@ -5,7 +5,6 @@ import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
 
 import 'package:new_project/models/user.dart';
-import '../dummyData.dart';
 
 void main() {
   GroupKnowy group;
@@ -25,8 +24,8 @@ void main() {
   UserKnowy user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun",
       "bio", [membership2], "pp", "password", "3");
 
-  membership = new MembershipKnowy(15, group, user);
-  membership1 = new MembershipKnowy(15, group, user1);
+  membership = new MembershipKnowy(0, group, user);
+  membership1 = new MembershipKnowy(0, group, user1);
   membership2 = new MembershipKnowy(0, group, user2);
   membership3 = new MembershipKnowy(0, group1, user);
   membership4 = new MembershipKnowy(0, group1, user1);
@@ -52,7 +51,6 @@ void main() {
 
   Map<MembershipKnowy, Option> answers1 = {
     membership: option1,
-    membership1: option2,
     membership2: option1
   };
 
@@ -79,6 +77,16 @@ void main() {
   group.questionsList.add(multipleChoice);
   //membership1.deleteQuestion(group, multipleChoice);
   print(group.getAllQuestions());
+
+  group.getAllTrustPoints(); // for initialize map elements.
+  Map<MembershipKnowy, int> bir = {membership: 4, membership2: 3};
+  membership1.voteTrustPoint(group, bir, membership1);
+  membership2.voteTrustPoint(
+      group, {membership: 3, membership1: 6}, membership2);
+  membership.voteTrustPoint(
+      group, {membership1: 4, membership2: 6}, membership);
+
+  print(group.trustPointsList.keys);
   membership1.voteQuestion(membership1, multipleChoice, option);
   membership2.voteQuestion(membership, multipleChoice, option);
   print(multipleChoice.calculateResult(group));

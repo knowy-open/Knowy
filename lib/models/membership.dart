@@ -26,7 +26,24 @@ class MembershipKnowy {
     }
   }
 
-  Map<MembershipKnowy, int> voteTrustPoint() {} //MembershipList alacak Grouptan
+  Map<MembershipKnowy, int> voteTrustPoint(GroupKnowy group,
+      Map<MembershipKnowy, int> trustPoint, MembershipKnowy membershipKnowy) {
+    group.membersList.forEach((element) {
+      if (group.trustPointsList.containsKey(element) &&
+          membershipKnowy == element) {
+        group.trustPointsList[element] += 0;
+        element.trustPoint += 0;
+      } else if (group.trustPointsList.containsKey(element)) {
+        group.trustPointsList
+            .update(element, (value) => value += trustPoint[element]);
+        element.trustPoint += trustPoint[element];
+      } else {
+        group.trustPointsList[element] += trustPoint[element];
+        element.trustPoint += trustPoint[element];
+      }
+    });
+    return group.trustPointsList;
+  } //MembershipList alacak Grouptan
 
   void leaveGroup(GroupKnowy group) {
     user.membershipsList.remove(this);
@@ -50,6 +67,6 @@ class MembershipKnowy {
 
   String toString() {
     // TODO: implement toString
-    return "membership: " + user.toString() + trustPoint.toString();
+    return "membership: " + user.toString() + " " + trustPoint.toString();
   }
 }

@@ -45,32 +45,6 @@ class MultipleChoice extends QuestionKnowy {
       }
     });
     return results;
-
-    /*
-    List<int> points = new List();
-    this.options.forEach((element) {
-      group.trustPointsList.forEach((key, value) {
-        //Kod buradaki fonksiyonda null hatası veriyor. if'e giremedik. 
-        Map<String, Option> answersWithId = getUserKnowyId(this.answers);
-        if (answersWithId.containsKey(key.toString()) &&
-            answersWithId[key].equals(element)) {
-          element.point += value;
-          points.add(element.point);
-          print(points);
-        }
-      });
-    });
-    int count = 0;
-
-    this.options.forEach((element) {
-      points.add(element.point);
-      print(element.point);
-      if (points.reduce(max) > count) {
-        count = points.reduce(max);
-        _result = element;
-      }
-    });
-    */
   }
 
   Option get result => super.result;
