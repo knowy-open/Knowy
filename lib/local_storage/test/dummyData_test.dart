@@ -22,6 +22,7 @@ class DummyData {
 
   Option option1;
   Option option2;
+  List<MembershipKnowy> membersList;
 
   void initializeValues() {
     user = new UserKnowy("deneme@gmail.com", "bikem", "demirci", "bio",
@@ -39,7 +40,7 @@ class DummyData {
     membership3 = new MembershipKnowy(0, group1, user);
     membership4 = new MembershipKnowy(0, group1, user1);
 
-    List<MembershipKnowy> membersList = [membership, membership1, membership2];
+    membersList = [membership, membership1, membership2];
     List<MembershipKnowy> membersList1 = [membership3, membership4];
 
     Map<MembershipKnowy, Map<MembershipKnowy, int>> trustPointsVotings = {

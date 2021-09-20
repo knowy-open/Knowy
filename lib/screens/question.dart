@@ -32,7 +32,7 @@ class Quest extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyApp()),
+                  MaterialPageRoute(builder: (context) => GroupProfilePage(),)
                 );
               },
               icon: Icon(

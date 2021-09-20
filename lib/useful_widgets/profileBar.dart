@@ -1,14 +1,17 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:new_project/local_storage/test/dummyData_test.dart';
+import 'package:new_project/screens/feedPage.dart';
 import 'package:new_project/screens/memberListPage.dart';
 import 'package:new_project/screens/signUpPage.dart';
 import 'package:new_project/screens/loginPage.dart';
 import 'package:new_project/screens/profile_settings.dart';
 
+DummyData dummyData = new DummyData();
+
 class ProfileBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    dummyData.initializeValues();
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -16,18 +19,21 @@ class ProfileBar extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: '142', title: 'Question'),
+            child: statsBox(count: dummyData.group.questionsList.length.toString(), title: 'Question'),
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width * 0.2,
               child: CircleAvatar(
-                backgroundImage: AssetImage(''),
+                child: ClipOval(
+                  child: Image.asset('lib/assets/knowy.jpeg', fit: BoxFit.contain)),
+                backgroundColor: Colors.white,
+                radius: MediaQuery.of(context).size.width * 0.08,
               )),
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: '7', title: 'Groups'),
+            child: statsBox(count: dummyData.group.membersList.length.toString(), title: 'Members'),
           ),
         ],
       ),
@@ -85,13 +91,10 @@ class But extends StatelessWidget {
 }
 
 Widget statsBox({
-
   @required String count,
   @required String title,
-
 }) {
   return Container(
-    
     height: 98,
     width: 80,
     child: Column(

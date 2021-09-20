@@ -60,6 +60,7 @@ class QuestionState extends State<QuestionCard> {
                         child: Column(
                           children: [
                             CircleAvatar(
+                              
                               backgroundColor: Colors.deepOrangeAccent,
                               radius: MediaQuery.of(context).size.width * 0.08,
                             )

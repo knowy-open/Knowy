@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/useful_widgets/profileBar.dart';
 import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
@@ -6,22 +7,21 @@ import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 
 
-void main() => runApp(MaterialApp(
-  home: MyApp(),
-));
+DummyData dummyData = new DummyData();
 
-class MyApp extends StatefulWidget {
+class GroupProfilePage extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _GroupProfilePageState createState() => _GroupProfilePageState();
 }
 List<String> soru =["İNANAMIYORUM  falfksld kdvvvvvcdssssss vdssssss svfsvd oısgjofjgkfg skdjgksjgskgjso sosjosıgjosıg","SONUNDA","ÇALIŞTI!"];
 List<String> ad =['bikem demirciiiiiiiiiiiiiib','falan','filan'];
-class _MyAppState extends State<MyApp> {
+class _GroupProfilePageState extends State<GroupProfilePage> {
 
 
 
   @override
   Widget build(BuildContext context) {
+    dummyData.initializeValues();
     return SafeArea(
       child: Scaffold( backgroundColor: Colors.white,
 
@@ -61,7 +61,7 @@ class  ProfileView extends StatelessWidget {
             padding: EdgeInsets.only( left:MediaQuery.of(context).size.width * 0.07 ),
             child: Row(children:[
               Text(
-                'Grup adı',
+                dummyData.group.name,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
