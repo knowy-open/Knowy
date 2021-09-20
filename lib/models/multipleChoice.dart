@@ -9,6 +9,7 @@ import 'package:new_project/screens/question.dart';
 
 class MultipleChoice extends QuestionKnowy {
   int mid;
+  DateTime dateCreated = DateTime.now();
   Map<Option, int> results = {};
   MultipleChoice(
       bool activeQuestion,

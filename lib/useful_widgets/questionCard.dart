@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_project/local_storage/test/dummyData_test.dart';
+import 'package:new_project/models/multipleChoice.dart';
+import 'package:intl/intl.dart';
 
 List<String> soru = [
   "İNANAMIYORUM  falfksld kdvvvvvcdssssss vdssssss svfsvd oısgjofjgkfg skdjgksjgskgjso sosjosıgjosıg",
@@ -12,6 +15,10 @@ List<String> ad = [
   'Bahadır Akgün'
 ];
 
+DummyData dummyData = new DummyData();
+List<String> sonSoru = [];
+List<String> sonAd = [];
+
 class QuestionCard extends StatefulWidget {
   @override
   QuestionState createState() => QuestionState();
@@ -20,13 +27,18 @@ class QuestionCard extends StatefulWidget {
 class QuestionState extends State<QuestionCard> {
   @override
   Widget build(BuildContext context) {
+    dummyData.initializeValues();
+    dummyData.group.getAllQuestions().forEach((element) {
+      sonSoru.add(element.questionMessage);
+      sonAd.add(element.creator.user.name + " " + element.creator.user.surname);
+    });
     ScrollController _scrollController = new ScrollController();
     return SingleChildScrollView(
       child: ListView.builder(
         controller: _scrollController,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: soru.length,
+        itemCount: sonSoru.length,
         itemBuilder: (context, index) {
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.45,
@@ -71,7 +83,7 @@ class QuestionState extends State<QuestionCard> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.47,
                                   child: Text(
-                                    ad[index],
+                                    sonAd[index],
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -92,7 +104,7 @@ class QuestionState extends State<QuestionCard> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.47,
                                   child: Text(
-                                    'Grup adı olacakkgl fknhhrtjpo rtkgrpoklk kdgjhjhgfh',
+                                    dummyData.group.name,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -115,7 +127,10 @@ class QuestionState extends State<QuestionCard> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '3',
+                                      dummyData.group.questionsList[0].deadline
+                                          .difference(DateTime.now())
+                                          .inDays
+                                          .toString(),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
@@ -157,7 +172,7 @@ class QuestionState extends State<QuestionCard> {
                         children: [
                           Expanded(
                             child: Text(
-                              soru[index],
+                              sonSoru[index],
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                               textAlign: TextAlign.left,
@@ -172,7 +187,15 @@ class QuestionState extends State<QuestionCard> {
                       left: MediaQuery.of(context).size.width * 0.05,
                     ),
                     child: Text(
-                      "17 Ocak ",
+                      new DateFormat("d MMMM")
+                          .format(dummyData.group.questionsList[0].dateCreated)
+                      /*dummyData.group.questionsList[0].dateCreated.day
+                              .toString() +
+                          " " +
+                          dummyData.group.questionsList[0].dateCreated.month
+                              .toString(),
+                              */
+                      ,
                       style: TextStyle(color: Colors.grey),
                       textAlign: TextAlign.start,
                     ),
@@ -208,7 +231,9 @@ class QuestionState extends State<QuestionCard> {
                             left: MediaQuery.of(context).size.width * 0.22,
                             child: TextButton(
                               child: Text(
-                                "10 Answered",
+                                dummyData.group.questionsList[0].answers.length
+                                        .toString() +
+                                    " answered",
                                 style: TextStyle(color: Colors.grey),
                               ),
                               onPressed: () {},

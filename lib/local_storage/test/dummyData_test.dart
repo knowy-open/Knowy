@@ -4,25 +4,34 @@ import 'package:new_project/models/multipleChoice.dart';
 import 'package:new_project/models/option.dart';
 
 import 'package:new_project/models/user.dart';
+import 'package:new_project/screens/question.dart';
 
 class DummyData {
-  void main() {
-    GroupKnowy group;
-    GroupKnowy group1;
-    MembershipKnowy membership;
-    MembershipKnowy membership1;
-    MembershipKnowy membership2;
-    MembershipKnowy membership3;
-    MembershipKnowy membership4;
+  GroupKnowy group;
+  GroupKnowy group1;
 
-    UserKnowy user = new UserKnowy("deneme@gmail.com", "bikem", "demirci",
-        "bio", [membership], "pp", "password", "1");
+  MembershipKnowy membership;
+  MembershipKnowy membership1;
+  MembershipKnowy membership2;
+  MembershipKnowy membership3;
+  MembershipKnowy membership4;
 
-    UserKnowy user1 = new UserKnowy("deneme1@gmail.com", "elif", "hancer",
-        "bio", [membership1], "pp", "password", "2");
+  UserKnowy user;
+  UserKnowy user1;
+  UserKnowy user2;
 
-    UserKnowy user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun",
-        "bio", [membership2], "pp", "password", "3");
+  Option option1;
+  Option option2;
+
+  void initializeValues() {
+    user = new UserKnowy("deneme@gmail.com", "bikem", "demirci", "bio",
+        [membership], "pp", "password", "1");
+
+    user1 = new UserKnowy("deneme1@gmail.com", "elif", "hancer", "bio",
+        [membership1], "pp", "password", "2");
+
+    user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun", "bio",
+        [membership2], "pp", "password", "3");
 
     membership = new MembershipKnowy(0, group, user);
     membership1 = new MembershipKnowy(0, group, user1);
@@ -45,8 +54,8 @@ class DummyData {
 
     List<UserKnowy> usersList = [user, user1, user2];
 
-    Option option1 = Option(1, "soru 1 option 1", 1);
-    Option option2 = Option(2, "soru 1 option 2", 1);
+    option1 = Option(1, "soru 1 option 1", 1);
+    option2 = Option(2, "soru 1 option 2", 1);
 
     List<Option> options1 = [option1, option2];
 
@@ -73,7 +82,7 @@ class DummyData {
     print(group2.membersList);
     MultipleChoice multipleChoice = membership1.startQuestion(
         [option, Option(3, "inputdenem", 5)],
-        DateTime.now(),
+        DateTime.now().add(Duration(days: 5)),
         "bu bir multiplechoice mıdır?");
     group.questionsList.add(multipleChoice);
     //membership1.deleteQuestion(group, multipleChoice);
