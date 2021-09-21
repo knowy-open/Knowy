@@ -8,8 +8,10 @@ class UserKnowy {
   String surname;
   String bio;
   String password;
+  int questionCounter = 0;
   List<MembershipKnowy> membershipsList; //groupId ?
   String profilePicture;
+
 
   UserKnowy.withId(this.uid);
 

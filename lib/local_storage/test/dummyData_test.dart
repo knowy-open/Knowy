@@ -37,7 +37,7 @@ class DummyData {
     membership = new MembershipKnowy(0, group, user);
     membership1 = new MembershipKnowy(0, group, user1);
     membership2 = new MembershipKnowy(0, group, user2);
-    membership3 = new MembershipKnowy(0, group1, user);
+    //membership3 = new MembershipKnowy(0, group1, user);
     membership4 = new MembershipKnowy(0, group1, user1);
 
     membersList = [membership, membership1, membership2];
@@ -81,7 +81,7 @@ class DummyData {
     Option option = new Option(2, "a", 5);
     GroupKnowy group2 = user.createGroup("4", "acabaolcakmi", 2, 1);
     print(group2.membersList);
-    MultipleChoice multipleChoice = membership1.startQuestion(
+    MultipleChoice multipleChoice = membership.startQuestion(
         [option, Option(3, "inputdenem", 5)],
         DateTime.now().add(Duration(days: 5)),
         "bu bir multiplechoice mıdır?");

@@ -23,7 +23,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
 
-  home: GroupProfilePage(),
+  home: MainProfile(),
 
 ));
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
-import 'package:new_project/useful_widgets/profileBar.dart';
+import 'package:new_project/useful_widgets/groupProfileBar.dart';
 import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
 import 'package:new_project/useful_widgets/btn_Add.dart';
@@ -52,10 +52,8 @@ class  ProfileView extends StatelessWidget {
         children:[
           Padding(
             padding:  EdgeInsets.only(right:MediaQuery.of(context).size.width * 0.05),
-            child: Row( mainAxisAlignment:MainAxisAlignment.center,children: [ProfileBar()],),
+            child: Row( mainAxisAlignment:MainAxisAlignment.center,children: [GroupProfileBar()],),
           ),
-
-
 
           Padding(
             padding: EdgeInsets.only( left:MediaQuery.of(context).size.width * 0.07 ),

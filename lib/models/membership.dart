@@ -14,6 +14,7 @@ class MembershipKnowy {
 
   MultipleChoice startQuestion(
       List<Option> options, DateTime deadline, String questionMessage) {
+        this.user.questionCounter++;
     MultipleChoice multipleChoice = new MultipleChoice(
         true, this, group, deadline, options, questionMessage, Map(), null, 5);
     return multipleChoice;
@@ -61,6 +62,7 @@ class MembershipKnowy {
 
   void deleteQuestion(GroupKnowy group, MultipleChoice question) {
     if (identical(question.creator, this)) {
+      this.user.questionCounter--;
       group.getAllQuestions().remove(question);
     }
   }

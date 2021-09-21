@@ -10,14 +10,13 @@ import 'package:new_project/screens/profile_settings.dart';
 
 DummyData dummyData = new DummyData();
 
-class ProfileBar extends StatelessWidget {
+class GroupProfileBar extends StatelessWidget {
 
-ProfileBar({UserKnowy user});
+GroupProfileBar({GroupKnowy group});
 
   @override
   Widget build(BuildContext context) {
     dummyData.initializeValues();
-    print("AAAAAAAAAA" + dummyData.user.questionCounter.toString());
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +24,7 @@ ProfileBar({UserKnowy user});
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.user.questionCounter.toString(), title: 'Question'),
+            child: statsBox(count: dummyData.group.questionsList.length.toString(), title: 'Question'),
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
@@ -39,7 +38,7 @@ ProfileBar({UserKnowy user});
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.user.membershipsList.length.toString(), title: 'Groups'),
+            child: statsBox(count: dummyData.group.membersList.length.toString(), title: 'Members'),
           ),
         ],
       ),

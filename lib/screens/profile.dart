@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/GroupProfilePage/view/widgets/ProfileCards.dart';
+import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/screens/profile_settings.dart';
-import 'package:new_project/useful_widgets/profileBar.dart';
+import 'package:new_project/useful_widgets/groupProfileBar.dart';
 import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
+import 'package:new_project/useful_widgets/profileBar.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -14,9 +17,12 @@ class Profile extends StatelessWidget {
   }
 }
 
+DummyData dummyData = new DummyData();
+
 class MainProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    dummyData.initializeValues();
     return Scaffold(
       body: Container(
         child: Column(children: <Widget>[
@@ -27,7 +33,7 @@ class MainProfile extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
                 child: Text(
-                  "getInfos() Methodu Yazılacak Buraya\ngetBio()\nMail tabii ne işe yarayacaksa",
+                  dummyData.user.bio,
                   textDirection: TextDirection.ltr,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
@@ -69,43 +75,22 @@ class MainProfile extends StatelessWidget {
   }
 }
 
-
-
 class ListViewHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(''),
-          ),
-          title: Text('Grup1'),
-          subtitle: Text('fr'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(''),
-          ),
-          title: Text('Grup2'),
-          subtitle: Text('gr'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(''),
-          ),
-          title: Text('Grup3'),
-          subtitle: Text('gr'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(''),
-          ),
-          title: Text('Grup 4'),
-          subtitle: Text('gr'),
-        ),
-      ],
-    );
+    dummyData.initializeValues();
+    return Expanded(
+              child: ListView.builder(
+                  itemCount: dummyData.user.membershipsList.length,
+                  itemBuilder: (context, index){
+                    return ListTile(
+                      title: Text(dummyData.user.membershipsList[index].group.name),
+                      subtitle: Text(dummyData.user.membershipsList[index].group.bio),
+                      leading: Image.asset("lib/assets/knowy.jpeg"),
+                    );
+                  }
+              ),
+            );
   }
 }
 
