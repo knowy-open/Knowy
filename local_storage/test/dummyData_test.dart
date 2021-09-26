@@ -6,7 +6,7 @@ import 'package:new_project/models/option.dart';
 import 'package:new_project/models/user.dart';
 
 class DummyData {
-  void main() {
+  void main() async {
     GroupKnowy group;
     GroupKnowy group1;
     MembershipKnowy membership;
@@ -16,13 +16,13 @@ class DummyData {
     MembershipKnowy membership4;
 
     UserKnowy user = new UserKnowy("deneme@gmail.com", "bikem", "demirci",
-        "bio", [membership], "pp", "password", "1");
+        "bio", [], "pp", "password", "1");
 
     UserKnowy user1 = new UserKnowy("deneme1@gmail.com", "elif", "hancer",
-        "bio", [membership1], "pp", "password", "2");
+        "bio", [], "pp", "password", "2");
 
     UserKnowy user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun",
-        "bio", [membership2], "pp", "password", "3");
+        "bio", [], "pp", "password", "3");
 
     membership = new MembershipKnowy(0, group, user);
     membership1 = new MembershipKnowy(0, group, user1);
@@ -30,7 +30,7 @@ class DummyData {
     membership3 = new MembershipKnowy(0, group1, user);
     membership4 = new MembershipKnowy(0, group1, user1);
 
-    List<MembershipKnowy> membersList = [membership, membership1, membership2];
+    List<MembershipKnowy> membersList = [membership1, membership2];
     List<MembershipKnowy> membersList1 = [membership3, membership4];
 
     Map<MembershipKnowy, Map<MembershipKnowy, int>> trustPointsVotings = {
@@ -43,6 +43,9 @@ class DummyData {
         new GroupKnowy("1", "knowy", membersList, trustPointsVotings, 12, 0);
     // group1 = new GroupKnowy("2", "notKnowy", membersList1, this.trustPointsVotingList);
 
+    //await user.membershipsList.add(membership);
+    await user1.membershipsList.add(membership1);
+    await user2.membershipsList.add(membership2);
     List<UserKnowy> usersList = [user, user1, user2];
 
     Option option1 = Option(1, "soru 1 option 1", 1);
@@ -69,7 +72,7 @@ class DummyData {
     //user.editProfile("name", "surname", "bioo");
     print(usersList.toString());
     Option option = new Option(2, "a", 5);
-    GroupKnowy group2 = user.createGroup("4", "acabaolcakmi", 2, 1);
+    GroupKnowy group2 = user.createGroup(user, "4", "acabaolcakmi", 2, 1);
     print(group2.membersList);
     MultipleChoice multipleChoice = membership1.startQuestion(
         [option, Option(3, "inputdenem", 5)],

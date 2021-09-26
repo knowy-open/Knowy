@@ -7,14 +7,14 @@ import 'package:new_project/models/user.dart';
 
 class MembershipKnowy {
   int trustPoint = 0;
-  final GroupKnowy group;
-  final UserKnowy user;
+  GroupKnowy group;
+  UserKnowy user;
 
   MembershipKnowy(this.trustPoint, this.group, this.user);
 
   MultipleChoice startQuestion(
       List<Option> options, DateTime deadline, String questionMessage) {
-        this.user.questionCounter++;
+    this.user.questionCounter++;
     MultipleChoice multipleChoice = new MultipleChoice(
         true, this, group, deadline, options, questionMessage, Map(), null, 5);
     return multipleChoice;
@@ -69,6 +69,11 @@ class MembershipKnowy {
 
   String toString() {
     // TODO: implement toString
-    return "membership: " + user.toString() + " " + trustPoint.toString();
+    return "membership: " +
+        user.toString() +
+        " " +
+        trustPoint.toString() +
+        "group: " +
+        group.toString();
   }
 }

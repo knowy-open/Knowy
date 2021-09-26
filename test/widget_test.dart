@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:new_project/GroupProfilePage/view/GroupProfilePage.dart';
 import 'package:new_project/screens/groupProfile.dart';
 
 void main() {

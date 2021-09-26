@@ -12,7 +12,6 @@ class UserKnowy {
   List<MembershipKnowy> membershipsList; //groupId ?
   String profilePicture;
 
-
   UserKnowy.withId(this.uid);
 
   UserKnowy(this.email, this.name, this.surname, this.bio, this.membershipsList,
@@ -35,13 +34,41 @@ class UserKnowy {
     }
   }
 
-  GroupKnowy createGroup(String gid, String name, int maxTimeForVoting, int minNumberOfVotesEvaluation) {
-    MembershipKnowy membershipKnowy = new MembershipKnowy(null, null, this);
-    return GroupKnowy(gid, name, [membershipKnowy], {}, maxTimeForVoting, minNumberOfVotesEvaluation);
+  GroupKnowy createGroup(
+    UserKnowy userKnowy,
+    String gid,
+    String name,
+    int maxTimeForVoting,
+    int minNumberOfVotesEvaluation,
+  ) {
+    // MembershipKnowy membershipKnowy = new MembershipKnowy(null, null, this);
+    GroupKnowy groupKnowy = new GroupKnowy(
+        gid, name, [], {}, maxTimeForVoting, minNumberOfVotesEvaluation);
+    print(
+        "                                                                                                  " +
+            groupKnowy.name);
+    MembershipKnowy membershipKnowy = joinGroup(groupKnowy, userKnowy);
+    print(
+        "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss " +
+            membershipKnowy.toString());
+    groupKnowy.membersList.add(membershipKnowy);
+
+    print(
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +
+            this.toString() +
+            "            " +
+            this.membershipsList[0].toString());
+
+    return groupKnowy;
   }
 
-  void joinGroup() {
-    //
+  MembershipKnowy joinGroup(GroupKnowy groupKnowy, UserKnowy userKnowy) {
+    MembershipKnowy membershipKnowy =
+        new MembershipKnowy(0, groupKnowy, userKnowy);
+    userKnowy.membershipsList.add(membershipKnowy);
+    print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" +
+        userKnowy.membershipsList.toString());
+    return membershipKnowy;
   }
 
   void deleteAccount(String uid, String password, String reason) {
