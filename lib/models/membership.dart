@@ -4,6 +4,7 @@ import 'package:new_project/models/option.dart';
 import 'package:new_project/models/question.dart';
 import 'dart:math';
 import 'package:new_project/models/user.dart';
+import 'package:new_project/screens/profile.dart';
 
 class MembershipKnowy {
   int trustPoint = 0;
@@ -29,6 +30,8 @@ class MembershipKnowy {
 
   Map<MembershipKnowy, int> voteTrustPoint(GroupKnowy group,
       Map<MembershipKnowy, int> trustPoint, MembershipKnowy membershipKnowy) {
+    group.membersList = [MembershipKnowy(40, group, user)];
+    group.trustPointsList[MembershipKnowy(2, group, user)] = 3;
     group.membersList.forEach((element) {
       if (group.trustPointsList.containsKey(element) &&
           membershipKnowy == element) {
@@ -39,8 +42,8 @@ class MembershipKnowy {
             .update(element, (value) => value += trustPoint[element]);
         element.trustPoint += trustPoint[element];
       } else {
-        group.trustPointsList[element] += trustPoint[element];
-        element.trustPoint += trustPoint[element];
+        //group.trustPointsList[element] += trustPoint[element];
+        //element.trustPoint += trustPoint[element];
       }
     });
     return group.trustPointsList;

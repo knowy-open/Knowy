@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/GroupProfilePage/view/widgets/ProfileCards.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/models/membership.dart';
+import 'package:new_project/screens/groupProfile.dart';
 import 'package:new_project/screens/profile_settings.dart';
 import 'package:new_project/useful_widgets/groupProfileBar.dart';
 import 'package:new_project/useful_widgets/btn_Add.dart';
@@ -35,88 +38,146 @@ class _MainProfileState extends State<MainProfile> {
     return DummyData();
   }
 
+  /*
+  1-  Firebase ile çalışmak
+  2-  DummyData'ya bakılacak
+  */
+
   @override
   Widget build(BuildContext context) {
+    var auth = FirebaseAuth.instance;
     dummyData.initializeValues();
     dummyData.user.membershipsList.forEach((element) {
-      membershipList.add(element.group.bio);
+      print('selamunaleyküm' + element.toString());
     });
-    return FutureProvider<DummyData>(
-      initialData: DummyData(),
-      create: (context) => someAsyncFunctionToGetMyModel(),
-      child: Scaffold(
-        body: Container(
-          child: Column(children: <Widget>[
-            ProfileBar(),
-            SizedBox(height: 0),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: Text(
-                    dummyData.user.bio,
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Padding(
-                    padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                    child: Text("4 Groups",
+
+    print("QQQQQQQQQQQQQQQQQQQ" + dummyData.user.membershipsList[0].toString());
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return FutureBuilder(
+        future: users.doc(auth.currentUser.uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+
+          if (snapshot.hasData && !snapshot.data.exists) {
+            return Text("Document does not exist");
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LinearProgressIndicator();
+          }
+          Map<String, dynamic> data =
+              snapshot.data.data() as Map<String, dynamic>;
+          return Scaffold(
+            body: Container(
+              child: Column(children: <Widget>[
+                ProfileBar(),
+                SizedBox(height: 0),
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                      child: Text(
+                        data['Name'],
                         textDirection: TextDirection.ltr,
                         style: TextStyle(
-                            color: Colors.deepPurple,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w300))),
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                        child: Text("${data['groups'].length} Groups",
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                                color: Colors.deepPurple,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w300))),
+                    Expanded(
+                        child: Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                MediaQuery.of(context).size.width * 0.5,
+                                0,
+                                MediaQuery.of(context).size.width * 0.05,
+                                0),
+                            child: BtnAdd()))
+                  ],
+                ),
                 Expanded(
                     child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            MediaQuery.of(context).size.width * 0.5,
-                            0,
-                            MediaQuery.of(context).size.width * 0.05,
-                            0),
-                        child: BtnAdd()))
-              ],
+                        padding: EdgeInsets.fromLTRB(30, 20, 0, 0),
+                        child: ListViewHome(data['groups'])))
+              ]),
             ),
-            Expanded(
-                child: Padding(
-              padding: EdgeInsets.fromLTRB(30, 20, 0, 0),
-              child: ListViewHome(),
-            ))
-          ]),
-        ),
-        bottomNavigationBar: BottomBar(),
-      ),
-    );
+            bottomNavigationBar: BottomBar(),
+          );
+        });
   }
 }
 
 class ListViewHome extends StatelessWidget {
+  final Stream<QuerySnapshot> _groupsStream =
+      FirebaseFirestore.instance.collection('groups').snapshots();
+  var list;
+  ListViewHome(this.list);
   @override
   Widget build(BuildContext context) {
-    dummyData.initializeValues();
-    print("QQQQQQQQQQQQQQQQQQQ" + dummyData.user.membershipsList[0].toString());
-    return Expanded(
-      child: Consumer<DummyData>(builder: (context, myModel, child) {
-        myModel.initializeValues();
-        return ListView.builder(
-            itemCount: dummyData.user.membershipsList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                //title: Text(
-                // dummyData.user.membershipsList[index].group.name.toString()),
-                subtitle: Text(
-                    myModel.user.membershipsList[index].group.bio.toString()),
-                leading: Image.asset("lib/assets/knowy.jpeg"),
-              );
-            });
-      }),
-    );
+    return StreamBuilder<QuerySnapshot>(
+        stream: _groupsStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LinearProgressIndicator();
+          }
+          return Expanded(
+            child: /*ListView(
+          children: snapshot.data.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+            return ListTile(
+              title: Text(data['full_name']),
+              subtitle: Text(data['company']),
+            );
+          }).toList(),
+        )*/
+
+                ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      GroupProfilePage(),
+                                  settings: RouteSettings(
+                                      arguments: snapshot.data.docs.firstWhere(
+                                          (element) =>
+                                              element.id == list[index]))));
+                        },
+                        //title: Text(
+                        // dummyData.user.membershipsList[index].group.name.toString()),
+                        title: Text(snapshot.data.docs.firstWhere((element) =>
+                            element.id == list[index])['Group Name']),
+                        leading: Image.asset("lib/assets/knowy.jpeg"),
+                      );
+                    }),
+          );
+        });
   }
 }

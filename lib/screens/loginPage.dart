@@ -22,9 +22,9 @@ final _formKey = GlobalKey<FormState>();
 String hata = '';
 
 class _loginState extends State<login> {
+  bool flag = false;
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserKnowy>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -76,19 +76,27 @@ class _loginState extends State<login> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: ElevatedButton(
                     onPressed: () async {
-                      dynamic result = await _auth.signInWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text);
-
-                      if (result == null) {
+                      try {
+                        dynamic result = await _auth.signInWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text);
+                        if (result == 0) {
+                          setState(() {
+                            hata = 'Could not sign in with those credentials';
+                            flag = true;
+                          });
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeedPage()));
+                        }
+                      } catch (err) {
                         setState(() {
                           hata = 'Could not sign in with those credentials';
+                          flag = true;
                         });
-                      } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FeedPage()));
+                        print(err);
                       }
                     },
                     style: buttonStyle,
@@ -106,14 +114,13 @@ class _loginState extends State<login> {
                 child: google_button(),
               ),
               Container(
-                //color: Colors.red,
-
+                color: flag ? Colors.red : Colors.white,
                 child: Text(
                   hata,
                   style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      backgroundColor: Colors.yellow),
+                    fontSize: 30,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               Padding(
@@ -191,4 +198,3 @@ class google_button extends StatelessWidget {
     );
   }
 }
-

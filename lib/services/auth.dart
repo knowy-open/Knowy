@@ -1,10 +1,8 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_project/models/user.dart';
 import 'database.dart';
 
 class AuthService {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
@@ -14,12 +12,13 @@ class AuthService {
 
   // auth change user stream
   Stream<UserKnowy> get user {
-    return _auth.authStateChanges()
-      //.map((FirebaseUser user) => _userFromFirebaseUser(user));
-      .map(_userFromFirebaseUser);
+    return _auth
+        .authStateChanges()
+        //.map((FirebaseUser user) => _userFromFirebaseUser(user));
+        .map(_userFromFirebaseUser);
   }
   //en son yaptığımız signInWithEmailAndPassword fonksiyonunu  yorum olarak ekledim
-  
+
   /*
   Future signInWithEmilAndPassword(String email, String password) async {
     try {
@@ -42,26 +41,30 @@ class AuthService {
   // sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       User user = result.user;
       return user;
     } catch (error) {
       print(error.toString());
-      return null;
-    } 
+      return 0;
+    }
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword(String name, String surname,String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String name, String surname, String email, String password) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       User user = result.user;
-      await DatabaseService(uid: user.uid).updateUserData(name, surname, email, password);
+      await DatabaseService(uid: user.uid)
+          .updateUserData(name, surname, email, password);
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
       return null;
-    } 
+    }
   }
 
   // sign out
@@ -73,5 +76,4 @@ class AuthService {
       return null;
     }
   }
-
 }

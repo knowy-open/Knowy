@@ -23,14 +23,12 @@ class DummyData {
   UserKnowy user2 = new UserKnowy("deneme2@gmail.com", "bahadir", "akgun",
       "bio", [], "pp", "password", "3");
 
-  void initializeValues() async {
-    membership = new MembershipKnowy(0, group, user);
+  void initializeValues() {
     membership1 = new MembershipKnowy(0, group, user1);
     membership2 = new MembershipKnowy(0, group, user2);
     membership3 = new MembershipKnowy(0, group1, user);
     membership4 = new MembershipKnowy(0, group1, user1);
 
-    List<MembershipKnowy> membersList = [membership1, membership2];
     List<MembershipKnowy> membersList1 = [membership3, membership4];
 
     Map<MembershipKnowy, Map<MembershipKnowy, int>> trustPointsVotings = {
@@ -39,13 +37,13 @@ class DummyData {
       membership2: ({membership: 0, membership1: 0, membership2: 0})
     };
 
-    group =
-        new GroupKnowy("1", "knowy", membersList, trustPointsVotings, 12, 0);
+    group = new GroupKnowy("1", "knowy", trustPointsVotings, 12, 0);
     // group1 = new GroupKnowy("2", "notKnowy", membersList1, this.trustPointsVotingList);
-
-    //await user.membershipsList.add(membership);
-    await user1.membershipsList.add(membership1);
-    await user2.membershipsList.add(membership2);
+    membership = new MembershipKnowy(0, group, user);
+    List<MembershipKnowy> membersList = [membership, membership1, membership2];
+    user.membershipsList.add(membership);
+    user1.membershipsList.add(membership1);
+    user2.membershipsList.add(membership2);
     List<UserKnowy> usersList = [user, user1, user2];
 
     Option option1 = Option(1, "soru 1 option 1", 1);
@@ -59,13 +57,13 @@ class DummyData {
     };
 
     print(usersList.toString());
-    print(membersList.toString());
+
     print(group.toString());
 
     //membership2.leaveGroup(group);
     print(membersList.toString());
 
-    //membership.editGroupProfile(group, "name", "yeni bio");
+    membership.editGroupProfile(group, "name", "yeni bio");
     //group.setMinNumberOfVotesForEvaluation(5);
     print(group.toString());
 

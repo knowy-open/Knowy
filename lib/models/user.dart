@@ -43,7 +43,7 @@ class UserKnowy {
   ) {
     // MembershipKnowy membershipKnowy = new MembershipKnowy(null, null, this);
     GroupKnowy groupKnowy = new GroupKnowy(
-        gid, name, [], {}, maxTimeForVoting, minNumberOfVotesEvaluation);
+        gid, name, {}, maxTimeForVoting, minNumberOfVotesEvaluation);
     print(
         "                                                                                                  " +
             groupKnowy.name);
@@ -51,7 +51,6 @@ class UserKnowy {
     print(
         "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss " +
             membershipKnowy.toString());
-    groupKnowy.membersList.add(membershipKnowy);
 
     print(
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" +

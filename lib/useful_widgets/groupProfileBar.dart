@@ -11,8 +11,7 @@ import 'package:new_project/screens/profile_settings.dart';
 DummyData dummyData = new DummyData();
 
 class GroupProfileBar extends StatelessWidget {
-
-GroupProfileBar({GroupKnowy group});
+  GroupProfileBar({GroupKnowy group});
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +23,26 @@ GroupProfileBar({GroupKnowy group});
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.group.questionsList.length.toString(), title: 'Question'),
+            child: statsBox(
+                count: dummyData.group.questionsList.length.toString(),
+                title: 'Question'),
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width * 0.2,
               child: CircleAvatar(
                 child: ClipOval(
-                  child: Image.asset('lib/assets/knowy.jpeg', fit: BoxFit.contain)),
+                    child: Image.asset('lib/assets/knowy.jpeg',
+                        fit: BoxFit.contain)),
                 backgroundColor: Colors.white,
                 radius: MediaQuery.of(context).size.width * 0.08,
               )),
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.group.membersList.length.toString(), title: 'Members'),
+            child: statsBox(
+                count: dummyData.group.membersList.length.toString(),
+                title: 'Members'),
           ),
         ],
       ),

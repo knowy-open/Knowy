@@ -16,8 +16,6 @@ import 'package:new_project/local_storage/test/dummyData_test.dart';
 
 //Birinci deneme : Kodları buraya aktarma denemeleri.
 
-DummyData dummyData = new DummyData();
-
 class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

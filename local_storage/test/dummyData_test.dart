@@ -39,8 +39,7 @@ class DummyData {
       membership2: ({membership: 0, membership1: 0, membership2: 0})
     };
 
-    group =
-        new GroupKnowy("1", "knowy", membersList, trustPointsVotings, 12, 0);
+    group = new GroupKnowy("1", "knowy", trustPointsVotings, 12, 0);
     // group1 = new GroupKnowy("2", "notKnowy", membersList1, this.trustPointsVotingList);
 
     //await user.membershipsList.add(membership);

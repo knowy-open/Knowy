@@ -7,7 +7,7 @@ import 'package:new_project/models/user.dart';
 class GroupKnowy {
   final String gid;
   String name;
-  String bio;
+  String bio = "artuğj çasdkı";
   String photo;
   List<MembershipKnowy> membersList = List.empty(growable: true);
   List<MultipleChoice> questionsList =
@@ -20,14 +20,15 @@ class GroupKnowy {
   Map<MembershipKnowy, Map<MembershipKnowy, int>>
       trustPointsVotings; // int=Trust Point
 
-  GroupKnowy(this.gid, this.name, this.membersList, this.trustPointsVotings,
-      this.maxTimeForVoting, this.minNumberOfVotesEvaluation);
+  GroupKnowy(this.gid, this.name, this.trustPointsVotings,
+      this.maxTimeForVoting, this.minNumberOfVotesEvaluation,
+      [this.membersList]);
 
   //required for initialize.
   Map<MembershipKnowy, int> getAllTrustPoints() {
-    membersList.forEach((element) {
-      trustPointsList[element] = 0;
-    });
+    //membersList.forEach((element) {
+    // trustPointsList[element] = 0;
+    //});
     return trustPointsList;
   }
 

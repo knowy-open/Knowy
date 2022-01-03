@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/models/group.dart';
@@ -11,48 +13,71 @@ import 'package:new_project/screens/profile_settings.dart';
 DummyData dummyData = new DummyData();
 
 class ProfileBar extends StatelessWidget {
-
-ProfileBar({UserKnowy user});
+  ProfileBar({UserKnowy user});
 
   @override
   Widget build(BuildContext context) {
+    var auth = FirebaseAuth.instance;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
     dummyData.initializeValues();
     print("AAAAAAAAAA" + dummyData.user.questionCounter.toString());
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.user.questionCounter.toString(), title: 'Question'),
-          ),
-          SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-              width: MediaQuery.of(context).size.width * 0.2,
-              child: CircleAvatar(
-                child: ClipOval(
-                  child: Image.asset('lib/assets/knowy.jpeg', fit: BoxFit.contain)),
-                backgroundColor: Colors.white,
-                radius: MediaQuery.of(context).size.width * 0.08,
-              )),
-          Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(count: dummyData.user.membershipsList.length.toString(), title: 'Groups'),
-          ),
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.07),
-              child: But())
-        ],
-      )
-    ]);
+    return FutureBuilder(
+        future: users.doc(auth.currentUser.uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+
+          if (snapshot.hasData && !snapshot.data.exists) {
+            return Text("Document does not exist");
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LinearProgressIndicator();
+          }
+          Map<String, dynamic> data =
+              snapshot.data.data() as Map<String, dynamic>;
+          return Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.15),
+                  child: statsBox(
+                      count: dummyData.user.questionCounter.toString(),
+                      title: 'Question'),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: CircleAvatar(
+                      child: ClipOval(
+                          child: Image.asset('lib/assets/knowy.jpeg',
+                              fit: BoxFit.contain)),
+                      backgroundColor: Colors.white,
+                      radius: MediaQuery.of(context).size.width * 0.08,
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.15),
+                  child: statsBox(
+                      count: data['groups'].length.toString(), title: 'Groups'),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.07),
+                    child: But())
+              ],
+            )
+          ]);
+        });
   }
 }
 

@@ -8,11 +8,9 @@ class BottomBar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       onTap: (currentIndex) {
-        
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TrustVotePage()), 
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
         );
       },
       iconSize: 35,
@@ -46,4 +44,3 @@ class BottomBar extends StatelessWidget {
     );
   }
 }
-
