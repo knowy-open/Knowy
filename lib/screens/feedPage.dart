@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
-import 'package:new_project/local_storage/test/dummyData_test.dart';
 /*  
     Kodların aktarılması için iki çözüm söz konusu
     Provider ile çalışılabilir

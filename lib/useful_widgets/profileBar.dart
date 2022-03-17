@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/models/group.dart';
 import 'package:new_project/models/user.dart';
-import 'package:new_project/screens/feedPage.dart';
+import 'package:new_project/screens/FeedPage.dart';
 import 'package:new_project/screens/memberListPage.dart';
 import 'package:new_project/screens/signUpPage.dart';
 import 'package:new_project/screens/loginPage.dart';

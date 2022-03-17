@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/services/auth.dart';
 
-import 'feedPage.dart';
+import 'FeedPage.dart';
 
 class SignUp extends StatefulWidget {
-
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignUp> {
-  
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordAgainController = TextEditingController();
+  final TextEditingController _passwordAgainController =
+      TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
   final AuthService _auth = AuthService();
@@ -30,23 +29,28 @@ class _SignInState extends State<SignUp> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-            margin: const EdgeInsets.all(10.0),
-            alignment: Alignment.center,
-            child: Form(
-              key: _formKey,
-              child: Column(
+          margin: const EdgeInsets.all(10.0),
+          alignment: Alignment.center,
+          child: Form(
+            key: _formKey,
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Sign Up',
-                  style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold, fontSize: 30),
+                  style: TextStyle(
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: size.height * 0.05),
-                textField(_nameController,"Name", 0.07, 0.8, 25.0, Colors.white),
+                textField(
+                    _nameController, "Name", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                textField(_surnameController, "Surname", 0.07, 0.8, 25.0, Colors.white),
+                textField(_surnameController, "Surname", 0.07, 0.8, 25.0,
+                    Colors.white),
                 SizedBox(height: size.height * 0.05),
                 /*TextFormField(
                   validator: (val) => val.isEmpty ? 'Enter an email' : null,
@@ -54,36 +58,45 @@ class _SignInState extends State<SignUp> {
                     setState(() => email = val);
                   },
                 ),*/
-                textField(_emailController, "E-Mail", 0.07, 0.8, 25.0, Colors.white),
+                textField(
+                    _emailController, "E-Mail", 0.07, 0.8, 25.0, Colors.white),
                 SizedBox(height: size.height * 0.05),
-                textField(_passwordController, "Password", 0.07, 0.8, 25.0, Colors.white),
+                textField(_passwordController, "Password", 0.07, 0.8, 25.0,
+                    Colors.white),
                 SizedBox(height: size.height * 0.05),
-                textField(_passwordAgainController, "Password", 0.07, 0.8, 25.0, Colors.white),
-                SizedBox(height: size.height * 0.05),   
+                textField(_passwordAgainController, "Password", 0.07, 0.8, 25.0,
+                    Colors.white),
+                SizedBox(height: size.height * 0.05),
                 RaisedButton(
                   onPressed: () async {
-                  if(_formKey.currentState.validate()){
-                    if(_passwordController.text == _passwordAgainController.text){
-                      dynamic result = await _auth.registerWithEmailAndPassword(_nameController.text,_surnameController.text , _emailController.text, _passwordController.text);
-                      if(result == null) {
+                    if (_formKey.currentState.validate()) {
+                      if (_passwordController.text ==
+                          _passwordAgainController.text) {
+                        dynamic result =
+                            await _auth.registerWithEmailAndPassword(
+                                _nameController.text,
+                                _surnameController.text,
+                                _emailController.text,
+                                _passwordController.text);
+                        if (result == null) {
+                          setState(() {
+                            error = 'Please supply a valid email';
+                            print(error);
+                          });
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeedPage()));
+                        }
+                      } else {
                         setState(() {
-                          error = 'Please supply a valid email';
+                          error = 'Please enter the same Password.';
                           print(error);
                         });
-                      }else {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FeedPage()));
-                          }
-                    }else{
-                      setState((){
-                        error = 'Please enter the same Password.';
-                        print(error);
-                      });
+                      }
                     }
-                  }
-                },
+                  },
                   color: Colors.deepPurple,
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   elevation: 2,
@@ -98,24 +111,29 @@ class _SignInState extends State<SignUp> {
                 SizedBox(height: size.height * 0.05),
                 Text(
                   'You are completely safe.',
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12),
                   textAlign: TextAlign.center,
                 ),
-                TextButton(onPressed: (){},
+                TextButton(
+                  onPressed: () {},
                   child: Text(
                     'Read our Terms & Conditions.',
-                    style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: TextStyle(
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 }
-
 
 class textField extends StatelessWidget {
   final TextEditingController controllerName;
@@ -173,4 +191,3 @@ class textField extends StatelessWidget {
     );
   }
 }
-

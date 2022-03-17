@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/models/group.dart';
 import 'package:new_project/models/user.dart';
-import 'package:new_project/screens/feedPage.dart';
-import 'package:new_project/screens/memberListPage.dart';
+import 'package:new_project/screens/FeedPage.dart';
+import 'package:new_project/screens/MemberListPage.dart';
 import 'package:new_project/screens/signUpPage.dart';
 import 'package:new_project/screens/loginPage.dart';
 import 'package:new_project/screens/profile_settings.dart';
@@ -15,7 +16,8 @@ class GroupProfileBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dummyData.initializeValues();
+    var args = ModalRoute.of(context).settings.arguments as DocumentSnapshot;
+    Map<String, dynamic> data = args.data() as Map<String, dynamic>;
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,8 +26,7 @@ class GroupProfileBar extends StatelessWidget {
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
             child: statsBox(
-                count: dummyData.group.questionsList.length.toString(),
-                title: 'Question'),
+                count: '2', title: 'Questions'), // will be implemented.
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
@@ -40,9 +41,19 @@ class GroupProfileBar extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-            child: statsBox(
-                count: dummyData.group.membersList.length.toString(),
-                title: 'Members'),
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MemberList(),
+                        settings:
+                            RouteSettings(arguments: data['Member List'])));
+              },
+              child: statsBox(
+                  count: data['Member List'].length.toString(),
+                  title: 'Members'),
+            ),
           ),
         ],
       ),
@@ -110,23 +121,21 @@ Widget statsBox({
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        TextButton(
-            onPressed: () {},
-            child: Column(
-              children: [
-                Text(
-                  count,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 14, color: Colors.black),
-                ),
-              ],
-            ))
+        Column(
+          children: [
+            Text(
+              count,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 14, color: Colors.black),
+            ),
+          ],
+        )
       ],
     ),
   );

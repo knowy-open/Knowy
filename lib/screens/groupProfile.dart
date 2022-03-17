@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/useful_widgets/groupProfileBar.dart';
@@ -5,6 +6,7 @@ import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
 import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 DummyData dummyData = new DummyData();
 
@@ -49,6 +51,13 @@ class _GroupProfilePageState extends State<GroupProfilePage> {
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context).settings.arguments as DocumentSnapshot;
+    Map<String, dynamic> data = args.data() as Map<String, dynamic>;
+    
+    data['Member List'].forEach((element) {
+      
+    });
+    final List<Map<String, dynamic>> il = [];
     return SafeArea(
       child: Column(
         children: [
@@ -66,7 +75,7 @@ class ProfileView extends StatelessWidget {
                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07),
             child: Row(children: [
               Text(
-                'Bahaa',
+                data['Group Name'],
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -89,11 +98,10 @@ class ProfileView extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.3),
-                child: BtnAdd(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
               ),
+              BtnAdd(),
             ]),
           ),
 

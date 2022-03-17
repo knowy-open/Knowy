@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_project/bottom_sheet/forgetPasswordBottomSheet.dart';
 import 'package:new_project/models/user.dart';
 import 'package:new_project/screens/SignUpPage.dart';
-import 'package:new_project/screens/feedPage.dart';
+import 'package:new_project/screens/FeedPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_project/useful_widgets/btn.dart';
 import 'package:new_project/useful_widgets/textField.dart';
