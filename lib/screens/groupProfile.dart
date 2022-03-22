@@ -15,12 +15,6 @@ class GroupProfilePage extends StatefulWidget {
   _GroupProfilePageState createState() => _GroupProfilePageState();
 }
 
-List<String> soru = [
-  "İNANAMIYORUM  falfksld kdvvvvvcdssssss vdssssss svfsvd oısgjofjgkfg skdjgksjgskgjso sosjosıgjosıg",
-  "SONUNDA",
-  "ÇALIŞTI!"
-];
-List<String> ad = ['bikem demirciiiiiiiiiiiiiib', 'falan', 'filan'];
 
 class _GroupProfilePageState extends State<GroupProfilePage> {
   @override

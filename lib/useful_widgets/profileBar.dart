@@ -21,7 +21,6 @@ class ProfileBar extends StatelessWidget {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     dummyData.initializeValues();
-    print("AAAAAAAAAA" + dummyData.user.questionCounter.toString());
     return FutureBuilder(
         future: users.doc(auth.currentUser.uid).get(),
         builder:
@@ -45,10 +44,12 @@ class ProfileBar extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.15),
+                  child: TextButton(
+              onPressed: () {},    
                   child: statsBox(
                       count: dummyData.user.questionCounter.toString(),
                       title: 'Question'),
-                ),
+                ),),
                 SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
                     width: MediaQuery.of(context).size.width * 0.2,
@@ -131,24 +132,22 @@ Widget statsBox({
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        TextButton(
-            onPressed: () {},
-            child: Column(
-              children: [
-                Text(
-                  count,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 14, color: Colors.black),
-                ),
-              ],
-            ))
+            children: <Widget>[
+        Column(
+          children: [
+            Text(
+              count,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 14, color: Colors.black),
+            ),
+          ],
+        )
       ],
     ),
   );

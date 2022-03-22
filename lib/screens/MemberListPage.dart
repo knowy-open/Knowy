@@ -52,109 +52,113 @@ class _MemberListState extends State<MemberList> {
     
 
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: size.height * 0.01),
-            Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    width: size.width * 0.8,
-                    height: size.height * 0.05,
-                    child: TextField(
-                      
-                      onChanged: (String abc) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: size.height * 0.01),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      width: size.width * 0.8,
+                      height: size.height * 0.05,
+                      child: TextField(
                         
-                      },
-                      cursorColor: Colors.deepPurple,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        enabledBorder: OutlineInputBorder(
+                        onChanged: (String abc) {
+                          
+                        },
+                        cursorColor: Colors.deepPurple,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey[300],
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey[300],
+                              color: Colors.deepPurple,
                             ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepPurple),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        fillColor: Colors.grey[300],
-                        filled: true,
-                        prefixIcon:
-                            Icon(Icons.search, color: Colors.deepPurple),
-                        suffixIcon: IconButton(
-                          padding: EdgeInsets.all(0.0),
-                          icon: Icon(
-                            Icons.clear,
-                            color: Colors.deepPurple,
-                            size: 20,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.deepPurple),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          fillColor: Colors.grey[300],
+                          filled: true,
+                          prefixIcon:
+                              Icon(Icons.search, color: Colors.deepPurple),
+                          suffixIcon: IconButton(
+                            padding: EdgeInsets.all(0.0),
+                            icon: Icon(
+                              Icons.clear,
+                              color: Colors.deepPurple,
+                              size: 20,
+                            ),
+                            onPressed: () {},
                           ),
-                          onPressed: () {},
                         ),
                       ),
                     ),
                   ),
-                ),
-                BtnAdd(),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20.0),
-              alignment: Alignment.topLeft,
-              child: Text(
-                args.length.toString() + ' Members',
+                  BtnAdd(),
+                ],
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: args.length,
-                  itemBuilder: (context, index) {
-                    CollectionReference users =
-                        FirebaseFirestore.instance.collection('users');
-
-                    return FutureBuilder<DocumentSnapshot>(
-                      future: users.doc(args[index]).get(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<DocumentSnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          return Text("Something went wrong");
-                        }
-
-                        if (snapshot.hasData && !snapshot.data.exists) {
-                          return Text("Document does not exist");
-                        }
-
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          Map<String, dynamic> data =
-                              snapshot.data.data() as Map<String, dynamic>;
-                          return ProfileCards(
-                            name: data['Name'],
-                            surname: data['Surname'],
-                            bio: 'abc',
-                            photo: members[index].photo,
-                          );
-                        }
-
-                        return Text("loading");
-                      },
-                    );
-                  }),
-            ),
-          ],
+              SizedBox(height: size.height * 0.03),
+              Container(
+                padding: EdgeInsets.only(left: 20.0),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  args.length.toString() + ' Members',
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: args.length,
+                    itemBuilder: (context, index) {
+                      CollectionReference users =
+                          FirebaseFirestore.instance.collection('users');
+    
+                      return FutureBuilder<DocumentSnapshot>(
+                        future: users.doc(args[index]).get(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<DocumentSnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
+    
+                          if (snapshot.hasData && !snapshot.data.exists) {
+                            return Text("Document does not exist");
+                          }
+    
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            Map<String, dynamic> data =
+                                snapshot.data.data() as Map<String, dynamic>;
+                            return ProfileCards(
+                              name: data['Name'],
+                              surname: data['Surname'],
+                              bio: 'abc',
+                              photo: members[index].photo,
+                            );
+                          }
+    
+                          return Text("loading");
+                        },
+                      );
+                    }),
+              ),
+            ],
+          ),
         ),
+        bottomNavigationBar: BottomBar(),
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }

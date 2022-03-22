@@ -47,11 +47,7 @@ class _MainProfileState extends State<MainProfile> {
   Widget build(BuildContext context) {
     var auth = FirebaseAuth.instance;
     dummyData.initializeValues();
-    dummyData.user.membershipsList.forEach((element) {
-      print('selamunaleyküm' + element.toString());
-    });
 
-    print("QQQQQQQQQQQQQQQQQQQ" + dummyData.user.membershipsList[0].toString());
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return FutureBuilder(
         future: users.doc(auth.currentUser.uid).get(),

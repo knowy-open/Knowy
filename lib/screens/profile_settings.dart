@@ -41,9 +41,9 @@ class Settings extends State<ProfileSettings> {
   final bioController = TextEditingController();
 
   final AuthService _auth = AuthService();
+  var auth = FirebaseAuth.instance;
   String documentId;
-
- 
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -185,22 +185,27 @@ class Settings extends State<ProfileSettings> {
                   ),
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         onPressed: () {
                           bio = bioController.text.toString();
                           name = nameController.text.toString();
+                          surname = surnameController.text.toString();
 
-                          FirebaseFirestore.instance
-                              .doc('/knowy/user/user/1')
+                          users
+                              .doc(auth.currentUser.uid)
                               .update({"bio": "$bio"});
-                          FirebaseFirestore.instance
-                              .doc('/knowy/user/user/1')
-                              .update({"name": "$name"});
+                          users
+                              .doc(auth.currentUser.uid)
+                              .update({"Name": "$name"});
+                          users
+                              .doc(auth.currentUser.uid)
+                              .update({"Surname": "$surname"});
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Profile()));
                         },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25)),
-                        textColor: Colors.white,
-                        color: Colors.deepPurple,
+                        style: buttonStyle,
                         child: Text(
                           "Save",
                           style: TextStyle(color: Colors.white),

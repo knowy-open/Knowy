@@ -5,6 +5,7 @@ import 'package:new_project/models/group.dart';
 import 'package:new_project/models/user.dart';
 import 'package:new_project/screens/FeedPage.dart';
 import 'package:new_project/screens/MemberListPage.dart';
+import 'package:new_project/screens/groupSettings.dart';
 import 'package:new_project/screens/signUpPage.dart';
 import 'package:new_project/screens/loginPage.dart';
 import 'package:new_project/screens/profile_settings.dart';
@@ -79,7 +80,7 @@ class But extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ProfileSettingsPage()),
+            MaterialPageRoute(builder: (context) => GroupSettings()),
           );
         },
         textColor: Colors.white,

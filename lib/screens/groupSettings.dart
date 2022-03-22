@@ -3,7 +3,18 @@ import '../useful_widgets/textField.dart';
 import '../useful_widgets/btn.dart';
 import '../useful_widgets/bottomBar.dart';
 
-class GroupSettings extends StatelessWidget {
+class GroupSettings extends StatefulWidget {
+  @override
+  _GroupSettingsState createState() => _GroupSettingsState();
+}
+
+class _GroupSettingsState extends State<GroupSettings> {
+  String groupName;
+  String description;
+  final groupNameController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -113,7 +124,7 @@ class GroupSettings extends StatelessWidget {
             SizedBox(height: size.height * 0.01),
             Btn("Edit Trustpoints", Colors.deepPurple, 0.07, 0.8),
             SizedBox(height: size.height * 0.01),
-            Btn("Apply", Colors.deepPurple, 0.07, 0.8),
+            Btn("Save", Colors.deepPurple, 0.07, 0.8),
             SizedBox(height: size.height * 0.01),
             Btn("Leave Group", Colors.black, 0.07, 0.8),
           ],
