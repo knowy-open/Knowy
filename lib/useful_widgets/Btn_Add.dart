@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
-class BtnAdd extends StatelessWidget {
-  BtnAdd();
+class BtnAdd extends StatefulWidget {
+  //BtnAdd(VoidCallback functionCall());
 
+  @override
+  _BtnAddState createState() => _BtnAddState();
+}
+
+class _BtnAddState extends State<BtnAdd> {
+  //_BtnAddState(VoidCallback functionCall());
+  
+  //final void Function(int) callback = functionCall();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,7 +24,7 @@ class BtnAdd extends StatelessWidget {
       ),
       child: IconButton(
         padding: EdgeInsets.all(0.0),
-        onPressed: () {},
+        onPressed: () => {},
         icon: Icon(
           Icons.add,
           color: Colors.deepPurple,

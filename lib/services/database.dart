@@ -20,12 +20,12 @@ class DatabaseService {
     });
   }
 
-  Future<void> createGroup(String name, String bio) async {
+  Future<void> createGroup(String name, String bio, String uid) async {
     return await groupCollection.add({
       'Group Name' : name,
       'Group Description' : bio,
-      'Member List' : '',
-    }).then((value) => print("Group Added"))
+      'Member List' : [uid],
+    }).then((value) async => await userCollection.doc(uid).update({"groups": FieldValue.arrayUnion([value.id])}))
       .catchError((error) => print("Failed to add group: $error"));
   }
 

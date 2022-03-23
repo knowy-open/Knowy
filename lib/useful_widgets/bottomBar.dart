@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/screens/CreateGroup.dart';
+import 'package:new_project/screens/feedPage.dart';
 import 'package:new_project/screens/profile.dart';
 import 'package:new_project/screens/trusrVotePage.dart';
 
@@ -8,10 +10,24 @@ class BottomBar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       onTap: (currentIndex) {
-        Navigator.push(
+        if(currentIndex == 0){
+          Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Profile()),
         );
+
+        }else if(currentIndex == 1){
+                  Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeedPage()),
+        );
+        }else{
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CreateGroup()),
+        );
+        }
+
       },
       iconSize: 35,
       fixedColor: Colors.purple,
