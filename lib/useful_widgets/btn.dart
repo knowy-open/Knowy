@@ -14,8 +14,9 @@ class Btn extends StatelessWidget {
   final Color foregroundColor;
   final double buttonWidth;
   final double buttonHeight;
+  final Function function;
 
-  Btn(this.buttonTxt, this.foregroundColor,this.buttonHeight, this.buttonWidth);
+  Btn(this.buttonTxt, this.foregroundColor,this.buttonHeight, this.buttonWidth, {this.function});
   // heigth: 0.07  width: 0.8
 
   @override
@@ -25,7 +26,7 @@ class Btn extends StatelessWidget {
 
 
       child: RaisedButton(
-        onPressed: () {},
+        onPressed: () => {if(function != null){function}},
         color: foregroundColor,
         padding: EdgeInsets.symmetric(horizontal: 50),
         elevation: 2,
