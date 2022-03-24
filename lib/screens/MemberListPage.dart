@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../useful_widgets/profileCards.dart';
 import '../useful_widgets/bottomBar.dart';
-import '../useful_widgets/btn_Add.dart';
+import '../useful_widgets/Btn_Add.dart';
 
 class MemberList extends StatefulWidget {
   @override
@@ -108,7 +108,7 @@ class _MemberListState extends State<MemberList> {
                       ),
                     ),
                   ),
-                  BtnAdd(),
+                  BtnAdd(2),
                 ],
               ),
               SizedBox(height: size.height * 0.03),

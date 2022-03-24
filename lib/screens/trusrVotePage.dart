@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:new_project/useful_widgets/btn.dart';
-import 'package:new_project/useful_widgets/btn_Add.dart';
+import 'package:new_project/useful_widgets/Btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 import 'package:new_project/useful_widgets/trustVoteCard.dart';
 
@@ -68,7 +68,7 @@ class TrustVote extends StatelessWidget {
                   ),
                 ),
               ),
-              BtnAdd(),
+              BtnAdd(2),
             ],
           ),
           Container(

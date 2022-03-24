@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:new_project/GroupProfilePage/view/widgets/ProfileCards.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/models/membership.dart';
+import 'package:new_project/screens/CreateGroup.dart';
 import 'package:new_project/screens/groupProfile.dart';
 import 'package:new_project/screens/profile_settings.dart';
+import 'package:new_project/useful_widgets/Btn_Add.dart';
 import 'package:new_project/useful_widgets/groupProfileBar.dart';
-import 'package:new_project/useful_widgets/btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 import 'package:new_project/useful_widgets/profileBar.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,11 @@ class _MainProfileState extends State<MainProfile> {
 
   @override
   Widget build(BuildContext context) {
+
+    Function func(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGroup()));
+    }
+    
     var auth = FirebaseAuth.instance;
     dummyData.initializeValues();
 
@@ -104,7 +110,7 @@ class _MainProfileState extends State<MainProfile> {
                                 0,
                                 MediaQuery.of(context).size.width * 0.05,
                                 0),
-                            child: BtnAdd()))
+                            child: new BtnAdd(0)))
                   ],
                 ),
                 Expanded(

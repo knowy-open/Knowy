@@ -4,7 +4,7 @@ import 'package:new_project/local_storage/test/dummyData_test.dart';
 import 'package:new_project/useful_widgets/groupProfileBar.dart';
 import 'package:new_project/useful_widgets/questionCard.dart';
 import 'package:flutter/widgets.dart';
-import 'package:new_project/useful_widgets/btn_Add.dart';
+import 'package:new_project/useful_widgets/Btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -95,7 +95,7 @@ class ProfileView extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
-              BtnAdd(),
+              BtnAdd(1),
             ]),
           ),
 

@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/screens/CreateGroup.dart';
+import 'package:new_project/screens/createQuestionnaire.dart';
+import 'package:new_project/screens/feedPage.dart';
 
-class BtnAdd extends StatefulWidget {
-  //BtnAdd(VoidCallback functionCall());
+class BtnAdd extends StatelessWidget 
+{
+  BtnAdd(this.page);
+  final int page;
 
-  @override
-  _BtnAddState createState() => _BtnAddState();
-}
-
-class _BtnAddState extends State<BtnAdd> {
-  //_BtnAddState(VoidCallback functionCall());
-  
-  //final void Function(int) callback = functionCall();
   @override
   Widget build(BuildContext context) {
+    var toPage;
+    if(page == 0){
+    toPage = CreateGroup();
+    }else  if(page == 1){
+    toPage = CreateQuestionnaire();
+    }else{
+      //toPage = addMember ?; 
+    }
     Size size = MediaQuery.of(context).size;
     return Container(
       height:size.height * 0.05, width:size.width * 0.07,
@@ -24,7 +29,8 @@ class _BtnAddState extends State<BtnAdd> {
       ),
       child: IconButton(
         padding: EdgeInsets.all(0.0),
-        onPressed: () => {},
+        onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => toPage)),
         icon: Icon(
           Icons.add,
           color: Colors.deepPurple,
@@ -34,4 +40,3 @@ class _BtnAddState extends State<BtnAdd> {
     );
   }
 }
-
