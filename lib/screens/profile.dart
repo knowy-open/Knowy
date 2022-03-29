@@ -46,11 +46,11 @@ class _MainProfileState extends State<MainProfile> {
 
   @override
   Widget build(BuildContext context) {
-
-    Function func(){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGroup()));
+    Function func() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CreateGroup()));
     }
-    
+
     var auth = FirebaseAuth.instance;
     dummyData.initializeValues();
 

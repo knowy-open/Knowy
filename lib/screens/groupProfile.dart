@@ -8,18 +8,14 @@ import 'package:new_project/useful_widgets/Btn_Add.dart';
 import 'package:new_project/useful_widgets/bottomBar.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-DummyData dummyData = new DummyData();
-
 class GroupProfilePage extends StatefulWidget {
   @override
   _GroupProfilePageState createState() => _GroupProfilePageState();
 }
 
-
 class _GroupProfilePageState extends State<GroupProfilePage> {
   @override
   Widget build(BuildContext context) {
-    dummyData.initializeValues();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -47,10 +43,8 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments as DocumentSnapshot;
     Map<String, dynamic> data = args.data() as Map<String, dynamic>;
-    
-    data['Member List'].forEach((element) {
-      
-    });
+    print(data);
+    data['Member List'].forEach((element) {});
     final List<Map<String, dynamic>> il = [];
     return SafeArea(
       child: Column(
@@ -95,7 +89,7 @@ class ProfileView extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
-              BtnAdd(1),
+              BtnAdd(1, id: args.id),
             ]),
           ),
 
