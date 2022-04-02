@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_project/screens/FeedPage.dart';
 import 'package:new_project/services/database.dart';
 import '../useful_widgets/btn.dart';
 import '../useful_widgets/bottomBar.dart';
@@ -135,12 +137,20 @@ class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
                 0.07,
                 0.8,
                 function: () {
-                  DatabaseService().createQuestionnaire(
-                      questionExplanation.toString(),
-                      {0.toString(): option1.toString()},
-                      selectedDate,
-                      DatabaseService().uid,
-                      args);
+                  DatabaseService()
+                      .createQuestionnaire(
+                          questionExplanation.text,
+                          {
+                            "Option Explanation": option1.text,
+                            "Value": 0.toString(),
+                          },
+                          selectedDate,
+                          FirebaseAuth.instance.currentUser.uid,
+                          args)
+                      .then((value) => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FeedPage())))
+                      .catchError(
+                          (onError) => print("Error: " + onError.toString()));
                 },
               ),
 //gurubun id'sini aktarma

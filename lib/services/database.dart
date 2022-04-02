@@ -44,15 +44,18 @@ class DatabaseService {
       DateTime deadline,
       String uid,
       String gid) async {
-    return await questionnaireCollection
-        .add({
-          'Question Explanation': questionExplanation,
-          'Options': options,
-          'Deadline': deadline.toString(),
-          'Creator': uid,
-          'Group': gid,
-        })
-        .then((value) async => print("question added"))
-        .catchError((error) => print("Failed to add group: $error"));
+    return await questionnaireCollection.add({
+      'Question Explanation': questionExplanation,
+      'Deadline': deadline.toString(),
+      'Creator': uid,
+      'Group': gid,
+    }).then((value) async {
+      print("Question were added.");
+      final CollectionReference optionCollection = FirebaseFirestore.instance
+          .collection('questionnaires')
+          .doc(value.id)
+          .collection("options");
+      await optionCollection.add(options);
+    }).catchError((error) => print("Failed to add group: $error"));
   }
 }
