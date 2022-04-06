@@ -58,4 +58,13 @@ class DatabaseService {
       await optionCollection.add(options);
     }).catchError((error) => print("Failed to add group: $error"));
   }
+  Future<void> getQuestionnaires() async {
+// User
+    DocumentSnapshot<Object> currentUser = await userCollection.doc(uid).get();
+    Map<String, dynamic> user = currentUser.data() as Map<String, dynamic>;
+    questionnaireCollection.where("groups", isEqualTo: user["groups"]).get();
+    
+  }
 }
+
+
