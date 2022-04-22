@@ -87,6 +87,7 @@ class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
                     child: IconButton(
                       onPressed: () {
                         setState(() {
+                          DatabaseService().getQuestionnaires();
                           optionList.add(optionList.length);
                         });
                       },

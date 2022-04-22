@@ -44,27 +44,60 @@ class DatabaseService {
       DateTime deadline,
       String uid,
       String gid) async {
-    return await questionnaireCollection.add({
-      'Question Explanation': questionExplanation,
-      'Deadline': deadline.toString(),
-      'Creator': uid,
-      'Group': gid,
-    }).then((value) async {
-      print("Question were added.");
-      final CollectionReference optionCollection = FirebaseFirestore.instance
-          .collection('questionnaires')
-          .doc(value.id)
-          .collection("options");
-      await optionCollection.add(options);
-    }).catchError((error) => print("Failed to add group: $error"));
+    return await questionnaireCollection
+        .add({
+          'Question Explanation': questionExplanation,
+          'Deadline': deadline.toString(),
+          'Creator': uid,
+          'Group': gid,
+        })
+        .then((value) async {
+          print("Question were added.");
+
+          final CollectionReference optionCollection = FirebaseFirestore
+              .instance
+              .collection('questionnaires')
+              .doc(value.id)
+              .collection("options");
+          await optionCollection.add(options);
+          return value.id;
+        })
+        .then((value) => updateGroupQuestionnaires(gid, value))
+        .catchError((error) => print("Failed to add group: $error"));
   }
+
   Future<void> getQuestionnaires() async {
 // User
+    List<String> questionsList;
     DocumentSnapshot<Object> currentUser = await userCollection.doc(uid).get();
+    var data = currentUser.data() as Map;
+    var groups = data['groups'] as List<String>;
+
+    groups.forEach((element) async {
+      DocumentSnapshot<Object> currentGroup =
+          await groupCollection.doc(element).get();
+      var data = currentGroup.data() as Map;
+      List<String> questions = data['questionsList'] as List<String>;
+      questionsList = questionsList + questions;
+      print(questionsList);
+    });
+
+    /* DocumentSnapshot<Object> currentUser = await userCollection.doc(uid).get();
     Map<String, dynamic> user = currentUser.data() as Map<String, dynamic>;
-    questionnaireCollection.where("groups", isEqualTo: user["groups"]).get();
-    
+    questionnaireCollection.where("groups", isEqualTo: user["groups"]).get();*/
+  }
+
+  Future<void> updateGroupQuestionnaires(
+    String gui,
+    String qid,
+  ) async {
+    return await groupCollection
+        .doc(gui)
+        .update({
+          'questionsList': [qid]
+        })
+        .then((value) => print("question added"))
+        .catchError(
+            (error) => print("Failed to add question to group: $error"));
   }
 }
-
-

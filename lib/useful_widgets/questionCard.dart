@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
@@ -14,7 +15,8 @@ List<String> ad = [
   'Elif Nur Hançer',
   'Bahadır Akgün'
 ];
-
+final metin =
+    'Magdeburg is the capital of Saxony-Anhalt state in Germany. It is a moderately sized city located halfway between Hannover and Berlin. The city is crossed by the river Elbe on which bank the OVG university has its main structures. One advantage in staying and studying in Magdeburg is the simple and favourable living cost. Public transportation in Magdeburg is very advanced and free of use for the students of the university. A popular bar mile for the students is the Hasselbachplatz.Magdeburg is the capital of Saxony-Anhalt state in Germany. It is a moderately sized city located halfway between Hannover and Berlin. The city is crossed by the river Elbe on which bank the OVG university has its main structures. One advantage in staying and studying in Magdeburg is the simple and favourable living cost. Public transportation in Magdeburg is very advanced and free of use for the students of the university. A popular bar mile for the students is the Hasselbachplatz.Magdeburg is the capital of Saxony-Anhalt state in Germany. It is a moderately sized city located halfway between Hannover and Berlin. The city is crossed by the river Elbe on which bank the OVG university has its main structures. One advantage in staying and studying in Magdeburg is the simple and favourable living cost. Public transportation in Magdeburg is very advanced and free of use for the students of the university. A popular bar mile for the students is the Hasselbachplatz.Magdeburg is the capital of Saxony-Anhalt state in Germany. It is a moderately sized city located halfway between Hannover and Berlin. The city is crossed by the river Elbe on which bank the OVG university has its main structures. One advantage in staying and studying in Magdeburg is the simple and favourable living cost. Public transportation in Magdeburg is very advanced and free of use for the students of the university. A popular bar mile for the students is the Hasselbachplatz.Magdeburg is the capital of Saxony-Anhalt state in Germany. It is a moderately sized city located halfway between Hannover and Berlin. The city is crossed by the river Elbe on which bank the OVG university has its main structures. One advantage in staying and studying in Magdeburg is the simple and favourable living cost. Public transportation in Magdeburg is very advanced and free of use for the students of the university. A popular bar mile for the students is the Hasselbachplatz.';
 DummyData dummyData = new DummyData();
 List<String> sonSoru = [];
 List<String> sonAd = [];
@@ -41,7 +43,7 @@ class QuestionState extends State<QuestionCard> {
         itemCount: sonSoru.length,
         itemBuilder: (context, index) {
           return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.45,
+            //bura değişebilir
             width: MediaQuery.of(context).size.width * 0.8,
             child: Card(
               margin: EdgeInsets.symmetric(
@@ -56,7 +58,7 @@ class QuestionState extends State<QuestionCard> {
                       Padding(
                         padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.03,
-                            top: MediaQuery.of(context).size.height * 0.01),
+                            top: MediaQuery.of(context).size.height * 0.02),
                         child: Column(
                           children: [
                             CircleAvatar(
@@ -162,23 +164,22 @@ class QuestionState extends State<QuestionCard> {
                       vertical: MediaQuery.of(context).size.height * 0.02,
                       horizontal: MediaQuery.of(context).size.width * 0.01,
                     ),
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              sonSoru[index],
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              textAlign: TextAlign.left,
-                            ),
-                          )
-                        ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.height * 0.01,
+                        horizontal: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      child: ExpandablePanel(
+                        theme: ExpandableThemeData(
+                          tapHeaderToExpand: true,
+                          tapBodyToCollapse: true,
+                        ),
+                        header: Text(metin,
+                            softWrap: true,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis),
+                        collapsed: null,
+                        expanded: Text(metin),
                       ),
                     ),
                   ),
@@ -201,7 +202,7 @@ class QuestionState extends State<QuestionCard> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
+                    height: MediaQuery.of(context).size.height * 0.12,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Stack(
                       children: [
