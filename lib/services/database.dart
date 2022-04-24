@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:new_project/QuestionPage/questionPage.dart';
+import 'package:new_project/services/auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -58,13 +63,29 @@ class DatabaseService {
       await optionCollection.add(options);
     }).catchError((error) => print("Failed to add group: $error"));
   }
-  Future<void> getQuestionnaires() async {
-// User
-    DocumentSnapshot<Object> currentUser = await userCollection.doc(uid).get();
-    Map<String, dynamic> user = currentUser.data() as Map<String, dynamic>;
-    questionnaireCollection.where("groups", isEqualTo: user["groups"]).get();
-    
+
+  Future<List<String>> getQuestionnaires() async {
+    DocumentSnapshot<Object> currentUser =
+        await userCollection.doc(FirebaseAuth.instance.currentUser.uid).get();
+    Map<String, dynamic> data = currentUser.data() as Map<String, dynamic>;
+    var groups = data['groups'] as List<dynamic>;
+    List<String> questions = [];
+    groups.forEach((element) async {
+      DocumentSnapshot<Object> currentGroup =
+          await groupCollection.doc(element).get();
+      Map<String, dynamic> groupData =
+          currentGroup.data() as Map<String, dynamic>;
+      groupData['questionsList'].forEach((element) {
+        questions.add(element);
+      });
+    });
+    return questions;
+  }
+
+  Future<String> getQuestionCreatorName(String id) async {
+    DocumentSnapshot snapshot = await userCollection.doc(id).get();
+    Map<String, dynamic> user = snapshot.data() as Map<String, dynamic>;
+    String result = user["Name"] + " " + user["Surname"];
+    return result;
   }
 }
-
-
