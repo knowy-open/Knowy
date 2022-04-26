@@ -51,11 +51,10 @@ class QuestionState extends State<QuestionCard> {
             return LinearProgressIndicator();
           }
 
-          if (snapshot.data.isEmpty) {
-            return LinearProgressIndicator();
+          if (snapshot.data.length == 0) {
+            snapshot.data.length++;
           }
 
-          Future.delayed(Duration(seconds: 5));
           print(snapshot.data.length);
           return SingleChildScrollView(
               child: ListView.builder(
