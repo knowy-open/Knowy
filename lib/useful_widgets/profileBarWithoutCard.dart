@@ -7,10 +7,12 @@ import 'package:new_project/screens/profile.dart';
 DummyData dummyData = new DummyData();
 
 class ProfileBarWithoutCard extends StatelessWidget {
+  final Map<String, dynamic> args;
+  ProfileBarWithoutCard(this.args);
   @override
   Widget build(BuildContext context) {
     dummyData.initializeValues();
-    print(dummyData.group.name);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.min,
@@ -141,7 +143,7 @@ class ProfileBarWithoutCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "Burda bir soru var ben index kullanmıyorum çünkü bende bir soru var liste gerek yok",
+                      args["Question Explanation"],
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       textAlign: TextAlign.left,

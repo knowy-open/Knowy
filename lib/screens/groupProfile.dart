@@ -45,7 +45,6 @@ class ProfileView extends StatelessWidget {
     Map<String, dynamic> data = args.data() as Map<String, dynamic>;
     print(data);
     data['Member List'].forEach((element) {});
-    final List<Map<String, dynamic>> il = [];
     return SafeArea(
       child: Column(
         children: [

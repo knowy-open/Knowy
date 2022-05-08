@@ -5,8 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/local_storage/test/dummyData_test.dart';
-import 'package:new_project/models/multipleChoice.dart';
 import 'package:intl/intl.dart';
+import 'package:new_project/screens/question.dart';
+import 'package:new_project/screens/resultPage.dart';
 import 'package:new_project/services/database.dart';
 
 List<String> soru = [
@@ -40,7 +41,7 @@ class QuestionState extends State<QuestionCard> {
 
     return FutureBuilder(
         future: databaseService.getQuestionnaires(),
-        builder: (context, AsyncSnapshot<List<String>> snapshot) {
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
           }
@@ -51,11 +52,8 @@ class QuestionState extends State<QuestionCard> {
             return LinearProgressIndicator();
           }
 
-          if (snapshot.data.length == 0) {
-            snapshot.data.length++;
-          }
-
-          print(snapshot.data.length);
+          String currentElement = "";
+          print("length is: " + snapshot.data.length.toString());
           return SingleChildScrollView(
               child: ListView.builder(
             controller: _scrollController,
@@ -63,18 +61,17 @@ class QuestionState extends State<QuestionCard> {
             shrinkWrap: true,
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
+              currentElement = "" + snapshot.data.elementAt(index).toString();
+              print(currentElement);
               return FutureBuilder(
                   future: FirebaseFirestore.instance
                       .collection("questionnaires")
-                      .doc(snapshot.data.elementAt(index))
+                      .doc(currentElement)
                       .get(),
-                  builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  builder: (context,
+                      AsyncSnapshot<DocumentSnapshot<Object>> snapshot) {
                     if (snapshot.hasError) {
                       return Text('Something went wrong');
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Text("Loading");
                     }
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -138,7 +135,7 @@ class QuestionState extends State<QuestionCard> {
                                                     .width *
                                                 0.47,
                                             child: Text(
-                                              sonAd[index],
+                                              sonAd[0],
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -239,14 +236,33 @@ class QuestionState extends State<QuestionCard> {
                               height: MediaQuery.of(context).size.height * 0.15,
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: FlatButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  if (await databaseService
+                                      .checkAlreadyAnswered(snapshot.data.id)) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                ResultPage(),
+                                            settings: RouteSettings(
+                                                arguments: snapshot)));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Question(),
+                                            settings: RouteSettings(
+                                                arguments: snapshot)));
+                                  }
+                                },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        data["Question Explanation"],
+                                        data['Question Explanation'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 3,
                                         textAlign: TextAlign.left,

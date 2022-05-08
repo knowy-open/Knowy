@@ -16,7 +16,12 @@ class CreateQuestionnaire extends StatefulWidget {
   State<CreateQuestionnaire> createState() => _CreateQuestionnaireState();
 }
 
+List<Map<String, dynamic>> _values = [];
+
+bool _flag = false;
+
 class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
@@ -87,8 +92,9 @@ class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
                     child: IconButton(
                       onPressed: () {
                         setState(() {
-                          optionList.add(optionList.length);
+                          count = count + 1;
                         });
+                        print(count);
                       },
                       icon: Icon(Icons.add, color: Colors.deepPurple),
                     ),
@@ -96,14 +102,19 @@ class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
                   Padding(
                     padding: EdgeInsets.only(right: size.width * 0.001),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          count = count - 1;
+                        });
+                        print(count);
+                      },
                       icon:
                           Icon(Icons.remove_rounded, color: Colors.deepPurple),
                     ),
                   ),
                 ],
               ),
-              Expanded(child: MyOptionWidget()),
+              _flexible(count), // Here is the deal.
               SizedBox(height: size.height * 0.02),
               Row(
                 children: [
@@ -140,10 +151,7 @@ class _CreateQuestionnaireState extends State<CreateQuestionnaire> {
                   DatabaseService()
                       .createQuestionnaire(
                           questionExplanation.text,
-                          {
-                            "Option Explanation": option1.text,
-                            "Value": 0.toString(),
-                          },
+                          _values,
                           selectedDate,
                           FirebaseAuth.instance.currentUser.uid,
                           args)
@@ -228,17 +236,15 @@ class MyCheckbox extends StatefulWidget {
 }
 
 class _CheckboxState extends State<MyCheckbox> {
-  bool isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return Checkbox(
       checkColor: Colors.white,
       activeColor: Colors.deepPurple,
-      value: isChecked,
+      value: _flag,
       onChanged: (value) {
         setState(() {
-          isChecked = !isChecked;
+          _flag = !_flag;
         });
       },
     );
@@ -306,4 +312,55 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
       ),
     );
   }
+}
+
+_flexible(int count) {
+  return Flexible(
+      child: ListView.builder(
+    shrinkWrap: true,
+    itemCount: count,
+    itemBuilder: (context, index) {
+      return _row(index);
+    },
+  ));
+}
+
+_row(int index) {
+  return Row(
+    children: [
+      Text('ID: $index'),
+      SizedBox(width: 30),
+      Expanded(
+        child: TextFormField(
+          onChanged: (val) {
+            _onUpdate(index, val);
+          },
+        ),
+      ),
+    ],
+  );
+}
+
+_onUpdate(int index, String val) async {
+  int foundKey = -1;
+  for (var map in _values) {
+    if (map.containsKey("id")) {
+      if (map["id"] == index) {
+        foundKey = index;
+        break;
+      }
+    }
+  }
+  if (-1 != foundKey) {
+    _values.removeWhere((map) {
+      return map["id"] == foundKey;
+    });
+  }
+  Map<String, dynamic> json = {
+    "id": index,
+    "value": 0,
+    "Question Explanation": val,
+  };
+  _values.add(json);
+  print(_values);
 }
